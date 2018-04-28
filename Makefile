@@ -6,20 +6,6 @@ CC = gcc -Wall -Wextra -Werror
 
 C_DIR = srcs
 C_FILES = $(addprefix $(C_DIR)/, \
-				tools_1.c \
-				tools_2.c \
-				tools_3.c \
-				get_data.c \
-				first_init.c \
-				delete_and_clear.c \
-				put_piece.c \
-				border_weight_calc.c \
-				border_weight_clear.c \
-				heat_weight_calc_1.c \
-				heat_weight_calc_2.c \
-				strat_map_calc.c \
-				strat_adjustment.c \
-				check_borders.c \
 				main.c)
 
 

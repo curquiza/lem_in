@@ -27,4 +27,18 @@ typedef struct	s_graph
 
 }				t_graph;
 
+typedef struct	s_draft
+{
+	char	*content;
+	t_draft	*next;
+}				t_draft;
+
+typedef struct	s_parsing
+{
+	t_draft	*input_draft;
+	t_draft	*rooms_draft;
+	int		start;
+	int		end;
+}				t_parsing;
+
 #endif

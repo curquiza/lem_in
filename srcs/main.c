@@ -1,5 +1,25 @@
 #include "lem-in.h"
 
+int		is_comment(char *line)
+{
+	return (line[0] == '#');
+}
+
+int		is_valid_command(char *line)
+{
+	return ( is_start_command(line) || is_end_command(line))
+}
+
+int		is_start_command(char *line)
+{
+	return (strequ(line, "##start"));
+}
+
+int		is_end_command(char *line)
+{
+	return (strequ(line, "##end"));
+}
+
 int		parser(void)
 {
 	char	*line;

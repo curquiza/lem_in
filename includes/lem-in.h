@@ -1,5 +1,5 @@
-#ifndef FILLER_H
-# define FILLER_H
+#ifndef LEM_IN_H
+# define LEM_IN_H
 
 # include "libft.h"
 
@@ -37,8 +37,8 @@ typedef struct	s_parsing
 {
 	t_draft	*input_draft;
 	t_draft	*rooms_draft;
-	int		start;
-	int		end;
+	int		start; // check si start est déjà pris
+	int		end; // idem pour end
 }				t_parsing;
 
 #endif

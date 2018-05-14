@@ -3,42 +3,44 @@
 
 # include "libft.h"
 
+// typedef struct	s_ant
+// {
+// 	int		id;
+// 	t_room	*room;
+// }				t_ant;
+
 typedef struct	s_room
 {
-	int		num;
-	char	*name;
-	int		weight;
-	// int		adj_number;
+	int						id;
+	char					*name;
+	int						weight;
+	int						ant;
+	// t_ant					*ant;
+	struct s_room	*next;
 }				t_room;
-
-typedef struct	s_ant
-{
-	int		name;
-	t_room	*room;
-	// t_room	*previous_room;
-}				t_ant;
 
 typedef struct	s_graph
 {
-	int		ants_number;
-	t_ant	**ants;
-	t_room	**rooms;
-	int		**adj_matrix;
+	int			ants_nb;
+	// t_ant		**ants;
+	t_room	**rooms_array;
+	t_room	*rooms_list;
+	int			**adj_matrix;
 
-}				t_graph;
+}								t_graph;
 
 typedef struct	s_draft
 {
-	char	*content;
-	t_draft	*next;
+	char						*content;
+	struct s_draft	*next;
 }				t_draft;
 
 typedef struct	s_parsing
 {
-	t_draft	*input_draft;
-	t_draft	*rooms_draft;
-	int		start; // check si start est déjà pris
-	int		end; // idem pour end
+	t_draft	*input;
+	// t_draft	*rooms_draft;
+	int		start;
+	int		end;
 }				t_parsing;
 
 #endif

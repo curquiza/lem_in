@@ -45,7 +45,7 @@ int		get_ants_number(t_graph *anthill, t_parsing *data)
 	while (42)
 	{
 		if (get_next_line(0, &line) != 1 || !line
-			|| is_valid_command(line) || ft_strlen(line) > 7)
+			|| is_valid_command(line) || ft_strlen(line) > 7) //strlen faux
 		{
 			record_input_line(&line, data);
 			return (-1);

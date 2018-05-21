@@ -2,6 +2,8 @@ import os, sys
 
 print 'Ciao les nazes\n'
 
-maps = os.listdir('maps/')
+maps = sorted(os.listdir('maps/'))
+print maps
 for m in maps:
-    print m
+    if m.endswith('.txt'):
+        print m

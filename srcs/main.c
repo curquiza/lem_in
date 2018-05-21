@@ -42,13 +42,8 @@ int		get_ants_number(t_graph *anthill, t_parsing *data)
 	char	*line;
 
 	line = NULL;
-	while (42)
+	while (get_next_line(0, &line) == 1 && line)
 	{
-		if (get_next_line(0, &line) != 1 || !line)
-		{
-			record_input_line(&line, data);
-			return (-1);
-		}
 		if (str_is_digit(line) && ft_strlen(line) < 8)
 		{
 			anthill->ants_nb = ft_atoi(line);
@@ -62,7 +57,8 @@ int		get_ants_number(t_graph *anthill, t_parsing *data)
 		}
 		record_input_line(&line, data);
 	}
-	return (0);
+	record_input_line(&line, data);
+	return (-1);
 }
 
 int		parser(t_graph *anthill)

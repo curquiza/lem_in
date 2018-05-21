@@ -37,7 +37,8 @@ typedef struct	s_draft
 
 typedef struct	s_parsing
 {
-	t_draft	*input;
+	// t_draft	*input;
+	char	*input;
 	// t_draft	*rooms_draft;
 	int		start;
 	int		end;

@@ -17,7 +17,7 @@ int		is_valid_command(char *line)
 
 int		is_comment(char *line)
 {
-	return (line[0] == '#');
+	return (line[0] == '#' && !is_valid_command(line));
 }
 
 int		str_is_digit(char *str)
@@ -44,13 +44,12 @@ int		get_ants_number(t_graph *anthill, t_parsing *data)
 	line = NULL;
 	while (42)
 	{
-		if (get_next_line(0, &line) != 1 || !line
-			|| is_valid_command(line) || ft_strlen(line) > 7) //strlen faux
+		if (get_next_line(0, &line) != 1 || !line)
 		{
 			record_input_line(&line, data);
 			return (-1);
 		}
-		if (str_is_digit(line))
+		if (str_is_digit(line) && ft_strlen(line) < 8)
 		{
 			anthill->ants_nb = ft_atoi(line);
 			record_input_line(&line, data);
@@ -63,6 +62,7 @@ int		get_ants_number(t_graph *anthill, t_parsing *data)
 		}
 		record_input_line(&line, data);
 	}
+	return (0);
 }
 
 int		parser(t_graph *anthill)

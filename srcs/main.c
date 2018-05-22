@@ -77,7 +77,7 @@ int		main(void)
 	ft_bzero(&anthill, sizeof(t_graph));
 	if (parser(&anthill) != 0)
 	{
-		ft_putendl("ERROR");
+		ft_putendl_fd("ERROR", 2);
 		return(0);
 	}
 	return (0);

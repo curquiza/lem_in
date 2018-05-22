@@ -1,9 +1,5 @@
-import os, sys
+import os
 
-print 'Ciao les nazes\n'
-
-maps = sorted(os.listdir('maps/'))
+all_files = sorted(os.listdir('maps/'))
+maps = [f for f in all_files if f.endswith('.txt')]
 print maps
-for m in maps:
-    if m.endswith('.txt'):
-        print m

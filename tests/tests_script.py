@@ -37,32 +37,36 @@ MAPS = {
     'parsing_empty_line_2':        {'error': True,  'rounds': 0},
     'parsing_empty_line_3':        {'error': False, 'rounds': 8},
     'parsing_empty_line_4':        {'error': False, 'rounds': 9},
-    'parsing_no_ant':              {'error': False, 'rounds': 0},
-    'parsing_no_end':              {'error': False, 'rounds': 0},
-    'parsing_no_start':            {'error': False, 'rounds': 0},
-    'parsing_no_start_no_end':     {'error': False, 'rounds': 0},
-    'parsing_starts_in_tubes':     {'error': False, 'rounds': 0},
-    'parsing_two_ends':            {'error': False, 'rounds': 0},
-    'parsing_two_starts':          {'error': False, 'rounds': 0},
-    'parsing_unknown_cmd_1':       {'error': False, 'rounds': 0},
-    'parsing_unknown_cmd_2':       {'error': False, 'rounds': 0},
-    'parsing_unknown_cmd_3':       {'error': False, 'rounds': 0},
-    'parsing_unknown_cmd_comment': {'error': False, 'rounds': 0},
-    'parsing_wrong_ants_line_1':   {'error': False, 'rounds': 0},
-    'parsing_wrong_ants_line_2':   {'error': False, 'rounds': 0},
-    'parsing_wrong_coord':         {'error': False, 'rounds': 0},
-    'parsing_wrong_end_1':         {'error': False, 'rounds': 0},
-    'parsing_wrong_end_2':         {'error': False, 'rounds': 0},
-    'parsing_wrong_end_3':         {'error': False, 'rounds': 0},
-    'parsing_wrong_start_1':       {'error': False, 'rounds': 0},
-    'parsing_wrong_start_2':       {'error': False, 'rounds': 0},
-    'parsing_wrong_start_3':       {'error': False, 'rounds': 0},
-    'parsing_wrong_tube_1':        {'error': False, 'rounds': 0},
-    'parsing_wrong_tube_2':        {'error': False, 'rounds': 0},
-    'parsing_wrong_tube_3':        {'error': False, 'rounds': 0},
-    'parsing_wrong_tube_4':        {'error': False, 'rounds': 0},
-    'trap_1':                      {'error': False, 'rounds': 0},
-    'trap_2':                      {'error': False, 'rounds': 0},
+    'parsing_no_ant':              {'error': True,  'rounds': 0},
+    'parsing_no_end':              {'error': True,  'rounds': 0},
+    'parsing_no_start':            {'error': True,  'rounds': 0},
+    'parsing_no_start_no_end':     {'error': True,  'rounds': 0},
+    'parsing_starts_in_tubes_1':   {'error': True,  'rounds': 0},
+    'parsing_starts_in_tubes_2':   {'error': False, 'rounds': 9},
+    'parsing_two_ends':            {'error': True,  'rounds': 0},
+    'parsing_two_starts':          {'error': True,  'rounds': 0},
+    'parsing_unknown_cmd_1':       {'error': False, 'rounds': 8},
+    'parsing_unknown_cmd_2':       {'error': False, 'rounds': 8},
+    'parsing_unknown_cmd_3':       {'error': False, 'rounds': 8},
+    'parsing_unknown_cmd_comment': {'error': False, 'rounds': 8},
+    'parsing_wrong_ants_line_1':   {'error': True,  'rounds': 0},
+    'parsing_wrong_ants_line_2':   {'error': True,  'rounds': 0},
+    'parsing_wrong_ants_line_3':   {'error': True,  'rounds': 0},
+    'parsing_wrong_ants_line_4':   {'error': True,  'rounds': 0},
+    'parsing_wrong_coord':         {'error': True,  'rounds': 0},
+    'parsing_wrong_end_1':         {'error': True,  'rounds': 0},
+    'parsing_wrong_end_2':         {'error': True,  'rounds': 0},
+    'parsing_wrong_end_3':         {'error': True,  'rounds': 0},
+    'parsing_wrong_end_4':         {'error': False, 'rounds': 9},
+    'parsing_wrong_start_1':       {'error': True,  'rounds': 0},
+    'parsing_wrong_start_2':       {'error': True,  'rounds': 0},
+    'parsing_wrong_start_3':       {'error': True,  'rounds': 0},
+    'parsing_wrong_tube_1':        {'error': False, 'rounds': 8},
+    'parsing_wrong_tube_2':        {'error': False, 'rounds': 8},
+    'parsing_wrong_tube_3':        {'error': True,  'rounds': 0},
+    'parsing_wrong_tube_4':        {'error': True,  'rounds': 0},
+    'trap_1':                      {'error': False, 'rounds': 5},
+    'trap_2':                      {'error': False, 'rounds': 4},
 }
 
 def print_rslt(filename, output):
@@ -96,10 +100,10 @@ def print_for_algo_case(output):
         print bcolors.OKBLUE + 'wip' + bcolors.ENDC
 
 def expects_error_msg_for(filename):
-    MAPS[filename]['error'] == True
+    return MAPS[filename]['error'] == True
 
 def is_an_error_msg(output):
-    'ERROR' in output and '->' not in output
+    return 'ERROR' in output and '\nL1-' not in output
 
 def should_put_error_msg():
     print bcolors.FAIL + 'KO' + bcolors.ENDC

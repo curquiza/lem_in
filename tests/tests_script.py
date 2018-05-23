@@ -66,30 +66,71 @@ MAPS = {
     'trap_2':                      {'error': False, 'rounds': 0},
 }
 
-def when_error_expected(output):
-    if 'ERROR' in output and '->' not in output:
+def print_rslt(filename, output):
+    if expects_error_msg_for(filename):
+        print_for_error_case(output)
+    else:
+        print_for_algo_case(output)
+
+def manage_error_returns(filename, output, returncode):
+    if returncode != -1 and returncode != 1:
+        print bcolors.FAIL + 'KO' + bcolors.ENDC
+        put('  ' +  output)
+        return
+    if expects_error_msg_for(filename):
+        print_for_error_case(output)
+    elif is_an_error_msg(output):
+        should_put_error_msg()
+    else:
+        weird_output_msg(returncode)
+
+def print_for_error_case(output):
+    if is_an_error_msg(output):
         print bcolors.OKGREEN + 'OK' + bcolors.ENDC
     else:
-        print bcolors.FAIL + 'KO' + bcolors.ENDC
-        print "  -> should return ERROR"
+        should_put_error_msg()
 
-def when_algo_expected(output):
-    print bcolors.OKBLUE + 'wip' + bcolors.ENDC
+def print_for_algo_case(output):
+    if is_an_error_msg(output):
+        should_put_error_msg()
+    else:
+        print bcolors.OKBLUE + 'wip' + bcolors.ENDC
+
+def expects_error_msg_for(filename):
+    MAPS[filename]['error'] == True
+
+def is_an_error_msg(output):
+    'ERROR' in output and '->' not in output
+
+def should_put_error_msg():
+    print bcolors.FAIL + 'KO' + bcolors.ENDC
+    print "  -> should return ERROR"
+
+def should_not_put_error_msg():
+    print bcolors.FAIL + 'KO' + bcolors.ENDC
+    print "  -> should not return ERROR"
+
+def weird_output_msg(returncode):
+    print bcolors.WARNING + 'WARNING' + bcolors.ENDC
+    print "  -> weird output for this return status (" + str(returncode) + ")"
+
+def put(str):
+    sys.stdout.write(str)
+
+# --- MAIN ----------------
 
 all_files = sorted(os.listdir('maps/'))
 maps = [f for f in all_files if f.endswith('.txt')]
 
 for map in maps:
     filename = os.path.splitext(map)[0]
-    sys.stdout.write(filename + ' ')
-    output = subprocess.check_output(['./lem-in < maps/' + map], shell=True, stderr=subprocess.STDOUT)
-    if MAPS[filename]:
-        if MAPS[filename]['error'] == True:
-            when_error_expected(output)
-        else:
-            when_algo_expected(output)      
+    put(filename + ' ')
+    if filename not in MAPS:
+        print bcolors.WARNING + 'Data not found for this map' + bcolors.ENDC
+        continue
+    try:
+        output = subprocess.check_output(['./lem-in < maps/' + map], shell=True, stderr=subprocess.STDOUT)
+    except subprocess.CalledProcessError as exc:
+        manage_error_returns(filename, exc.output, exc.returncode)
     else:
-        print 'Data not found for this map'
-    # if 'ERROR' not in output
-    # output = subprocess.check_output(['./lem-in < maps/' + map], shell=True)
-    # print output
+        print_rslt(filename, output)

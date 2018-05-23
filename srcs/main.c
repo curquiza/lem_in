@@ -78,7 +78,7 @@ int		main(void)
 	if (parser(&anthill) != 0)
 	{
 		ft_putendl_fd("ERROR", 2);
-		return(0);
+		return(1);
 	}
 	return (0);
 }

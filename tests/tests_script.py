@@ -2,19 +2,19 @@ import os, sys
 import subprocess
 
 class bcolors:
-    HEADER = '\033[95m'
-    OKBLUE = '\033[94m'
-    OKGREEN = '\033[92m'
-    WARNING = '\033[93m'
-    FAIL = '\033[91m'
-    ENDC = '\033[0m'
-    BOLD = '\033[1m'
+    HEADER    = '\033[95m'
+    OKBLUE    = '\033[94m'
+    OKGREEN   = '\033[92m'
+    WARNING   = '\033[93m'
+    FAIL      = '\033[91m'
+    ENDC      = '\033[0m'
+    BOLD      = '\033[1m'
     UNDERLINE = '\033[4m'
 
 MAPS = {
     'mini_map_1':                  {'error': False, 'rounds': 7},
     'multi_ways_1':                {'error': False, 'rounds': 6},
-    'multi_ways_2':                {'error': False, 'rounds': 0},
+    'multi_ways_2':                {'error': False, 'rounds': 8},
     'multi_ways_2_bis':            {'error': False, 'rounds': 8},
     'multi_ways_3':                {'error': False, 'rounds': 7},
     'multi_ways_4':                {'error': False, 'rounds': 7},
@@ -73,7 +73,7 @@ def print_rslt(filename, output):
     if expects_error_msg_for(filename):
         print_for_error_case(output)
     else:
-        print_for_algo_case(output)
+        print_for_algo_case(filename, output)
 
 def manage_error_returns(filename, output, returncode):
     if returncode != -1 and returncode != 1:
@@ -83,7 +83,7 @@ def manage_error_returns(filename, output, returncode):
     if expects_error_msg_for(filename):
         print_for_error_case(output)
     elif is_an_error_msg(output):
-        should_put_error_msg()
+        should_not_put_error_msg()
     else:
         weird_output_msg(returncode)
 
@@ -93,11 +93,24 @@ def print_for_error_case(output):
     else:
         should_put_error_msg()
 
-def print_for_algo_case(output):
+def print_for_algo_case(filename, output):
     if is_an_error_msg(output):
-        should_put_error_msg()
+        should_not_put_error_msg()
     else:
-        print bcolors.OKBLUE + 'wip' + bcolors.ENDC
+        print_rounds_rslt(filename, output)
+
+def print_rounds_rslt(filename, output):
+    if count_rounds(output) == MAPS[filename]['rounds']:
+        print bcolors.OKGREEN + 'OK' + bcolors.ENDC
+    else:
+        print bcolors.FAIL + 'KO' + bcolors.ENDC
+        print "  -> should compute in " + str(MAPS[filename]['rounds']) + " rounds"
+        print "  -> your result : " + str(count_rounds(output)) + " rounds"
+
+def count_rounds(output):
+    lines = output.split('\n')
+    rounds = [l for l in lines if l.startswith('L')]
+    return len(rounds)
 
 def expects_error_msg_for(filename):
     return MAPS[filename]['error'] == True

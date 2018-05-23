@@ -1,5 +1,4 @@
 import os, sys
-# from os.path import basename
 import subprocess
 
 class bcolors:

@@ -73,12 +73,38 @@ int		get_ants_number(t_graph *anthill, t_parsing *data)
 	return (-1);
 }
 
+int		get_rooms_and_tubes(t_graph *anthill, t_parsing *data)
+{
+	char	*line;
+
+	line = NULL;
+	while (get_next_line(0, &line) == 1 && line)
+	{
+		if (is_valid_command(line))
+		{
+			; // do stuff for ##start or ##end
+			; // si start ou end dans tube -> stop = 0
+			; // si 2 start ou end -> error = -1
+		}
+		else if (!is_comment(line))
+		{
+			; // check if room is valid + record it
+			; // si pas valide -> stop
+		}
+		record_input_line(&line, data);
+	}
+	record_input_line(&line, data);
+	return (-1);
+}
+
 int		parser(t_graph *anthill)
 {
 	t_parsing	data;
 
 	ft_bzero(&data, sizeof(t_parsing));
 	if (get_ants_number(anthill, &data) != 0)
+		return (-1);
+	if (get_rooms_and_tubes(anthill, &data) != 0)
 		return (-1);
 	return (0);
 }

@@ -37,11 +37,18 @@ typedef struct	s_draft
 
 typedef struct	s_parsing
 {
-	// t_draft	*input;
 	char	*input;
-	// t_draft	*rooms_draft;
 	int		start;
 	int		end;
+	int		rooms_done;
 }				t_parsing;
+
+int		is_start_command(char *line);
+int		is_end_command(char *line);
+int		is_valid_command(char *line);
+int		is_comment(char *line);
+int		str_is_digit(char *str);
+
+int		parser(t_graph *anthill);
 
 #endif

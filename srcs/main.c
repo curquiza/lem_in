@@ -33,8 +33,20 @@ int		str_is_digit(char *str)
 
 void	record_input_line(char **line, t_parsing *data)
 {
-	(void)data; //ajoute un maillon à la liste chainée avec la donnée de la ligne
+	char	*buff;
+	int		old_len;
+	int		line_len;
+
+	buff = data->input;
+	line_len = *line ? ft_strlen(*line) : 0;
+	old_len = data->input ? ft_strlen(data->input) : 0;
+	data->input = ft_strnew(old_len + line_len);
+	if (buff)
+		ft_strcpy(data->input, buff);
+	if (*line)
+		ft_strcpy(data->input + old_len, *line);
 	ft_strdel(line);
+	ft_strdel(&buff);
 }
 
 int		get_ants_number(t_graph *anthill, t_parsing *data)
@@ -65,6 +77,7 @@ int		parser(t_graph *anthill)
 {
 	t_parsing	data;
 
+	ft_bzero(&data, sizeof(t_parsing));
 	if (get_ants_number(anthill, &data) != 0)
 		return (-1);
 	return (0);

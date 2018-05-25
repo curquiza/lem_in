@@ -49,6 +49,8 @@ int		is_valid_command(char *line);
 int		is_comment(char *line);
 int		str_is_digit(char *str);
 
+void	record_input_line(char **line, t_parsing *data);
+int		get_ants_number(t_graph *anthill, t_parsing *data);
 int		parser(t_graph *anthill);
 
 #endif

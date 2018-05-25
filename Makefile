@@ -8,6 +8,7 @@ C_DIR = srcs
 C_FILES = $(addprefix $(C_DIR)/, \
 			parsing.c \
 			parsing_tools.c \
+			parsing_ants_number.c \
 			main.c)
 
 

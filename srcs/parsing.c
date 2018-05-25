@@ -38,14 +38,13 @@ int		get_ants_number(t_graph *anthill, t_parsing *data)
 		}
 		record_input_line(&line, data);
 	}
-	record_input_line(&line, data);
 	return (-1);
 }
 
 int		is_valid_room(char *line)
 {
-	char	*room_data;
-	
+	char	**room_data;
+
 	room_data = ft_strsplit(line, ' ');
 	if (!room_data || ft_tablen(room_data) != 3)
 		return (0);
@@ -53,6 +52,11 @@ int		is_valid_room(char *line)
 		|| !str_is_digit(room_data[1]) || str_is_digit(room_data[2]))
 		return (0);
 	return (1);
+}
+
+int		is_valid_tube(char *line)
+{
+	return (ft_strchr(line, '-') ? 1 : 0);
 }
 
 int		is_valid_input(char *line, t_parsing *data)
@@ -86,10 +90,11 @@ int		get_rooms_and_tubes(t_graph *anthill, t_parsing *data)
 {
 	char	*line;
 
-	(void)anthill;
 	line = NULL;
 	while (get_next_line(0, &line) == 1 && line)
 	{
+		if (!data->rooms_done && !is_comment(line) && ft_strchr(line, '-'))
+			data->rooms_done = 1;
 		if (is_valid_command(line))
 		{
 			; // do stuff for ##start or ##end
@@ -98,7 +103,7 @@ int		get_rooms_and_tubes(t_graph *anthill, t_parsing *data)
 		}
 		else if (!is_comment(line))
 		{
-			if (!is_valid_input(line))
+			if (!is_valid_input(line, data))
 			{
 				record_input_line(&line, data);
 				return (0);
@@ -108,8 +113,7 @@ int		get_rooms_and_tubes(t_graph *anthill, t_parsing *data)
 		}
 		record_input_line(&line, data);
 	}
-	record_input_line(&line, data);
-	return (-1);
+	return (0);
 }
 
 int		parser(t_graph *anthill)

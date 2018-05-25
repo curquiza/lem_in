@@ -30,6 +30,7 @@ MAPS = {
     'parsing_comment_5':           {'error': False, 'rounds': 8},
     'parsing_comment_6':           {'error': False, 'rounds': 8},
     'parsing_comment_7':           {'error': False, 'rounds': 8},
+    'parsing_comment_8':           {'error': False, 'rounds': 8},
     'parsing_empty_1':             {'error': True,  'rounds': 0},
     'parsing_empty_2':             {'error': True,  'rounds': 0},
     'parsing_empty_3':             {'error': True,  'rounds': 0},
@@ -61,6 +62,7 @@ MAPS = {
     'parsing_wrong_start_1':       {'error': True,  'rounds': 0},
     'parsing_wrong_start_2':       {'error': True,  'rounds': 0},
     'parsing_wrong_start_3':       {'error': True,  'rounds': 0},
+    'parsing_wrong_start_4':       {'error': True,  'rounds': 0},
     'parsing_wrong_tube_1':        {'error': False, 'rounds': 8},
     'parsing_wrong_tube_2':        {'error': False, 'rounds': 8},
     'parsing_wrong_tube_3':        {'error': True,  'rounds': 0},
@@ -100,7 +102,7 @@ def bad_nb_of_rounds_msg(filename, output):
 def bad_returncode_msg(output):
     print bcolors.FAIL + 'KO' + bcolors.ENDC
     put('  ' +  output)
-    
+
 
 def put(str):
     sys.stdout.write(str)

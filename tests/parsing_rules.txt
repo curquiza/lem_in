@@ -10,6 +10,7 @@ Ligne non conforme qui arrête la lecture :
   ex : salle1 - salle2 -> faux
        salle1-salle2 12 13 -> faux
        salle1-salle2-salle3 -> faux
+- un tube dont les noms de salle n'existent pas n'est pas considéré comme non conforme
 - un ##start ou ##end dans les tubes
 - un ##start ou ##end alors qu'un premier start/end a déjà été enregistré
 - un ##start ou ##end qui n'est pas suivi par une ligne de room valide.

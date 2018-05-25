@@ -13,6 +13,7 @@ typedef struct	s_room
 {
 	int						id;
 	char					*name;
+	int						special_room; // 'e' ou 's'
 	int						weight;
 	int						ant;
 	// t_ant					*ant;

@@ -54,6 +54,8 @@ int		is_valid_input(char *line, t_parsing *data)
 		else if (is_valid_tube(line))
 		{
 			data->rooms_done = 1;
+			//creer matrice adjacence
+			//creer tableau des rooms
 			return (1);
 		}
 		return (0);
@@ -68,12 +70,17 @@ void	add_room_to_anthill(char *line, t_graph *anthill, int special_room)
 	(void)line;
 	(void)anthill;
 	(void)special_room;
+
+	//ajouter un maillon à la liste chainée des rooms
 }
 
 void	add_tube_to_anthill(char *line, t_graph *anthill)
 {
 	(void)line;
 	(void)anthill;
+
+	//check le nom
+	//ajouter à la matrice adjacence si ok
 }
 
 void	add_input_to_anthill(char *line, t_parsing *data, t_graph *anthill)
@@ -136,7 +143,11 @@ int		parser(t_graph *anthill)
 
 	ft_bzero(&data, sizeof(t_parsing));
 	if (get_ants_number(anthill, &data) != 0)
+		//continuer de lire jusqu'à la fin
 		return (-1);
 	get_rooms_and_tubes(anthill, &data);
+	//continuer de lire jusqu'à la fin
+	//check si presence de end et de start
+	//repartir les poids des salles => check au passage si un path existe
 	return (0);
 }

@@ -66,6 +66,7 @@ MAPS = {
     'parsing_wrong_room_4':        {'error': True,  'rounds': 0},
     'parsing_wrong_room_5':        {'error': True,  'rounds': 0},
     'parsing_wrong_room_6':        {'error': False, 'rounds': 8},
+    'parsing_wrong_room_7':        {'error': True,  'rounds': 0},
     'parsing_wrong_start_1':       {'error': True,  'rounds': 0},
     'parsing_wrong_start_2':       {'error': True,  'rounds': 0},
     'parsing_wrong_start_3':       {'error': True,  'rounds': 0},
@@ -76,6 +77,7 @@ MAPS = {
     'parsing_wrong_tube_4':        {'error': True,  'rounds': 0},
     'parsing_wrong_tube_5':        {'error': True,  'rounds': 0},
     'parsing_wrong_tube_6':        {'error': False, 'rounds': 9},
+    'parsing_wrong_tube_7':        {'error': True,  'rounds': 0},
     'trap_1':                      {'error': False, 'rounds': 5},
     'trap_2':                      {'error': False, 'rounds': 4},
 }

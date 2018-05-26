@@ -104,7 +104,6 @@ int		manage_valid_command(char **line, t_parsing *data, t_graph *anthill)
 		record_input_line(line, data);
 		return (-1);
 	}
-	// (void)anthill;
 	add_room_to_anthill(*line, anthill, data, command);
 	return (0);
 }

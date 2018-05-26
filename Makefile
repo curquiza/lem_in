@@ -9,6 +9,8 @@ C_FILES = $(addprefix $(C_DIR)/, \
 			parsing.c \
 			parsing_tools.c \
 			parsing_ants_number.c \
+			add_rooms.c \
+			add_tubes.c \
 			main.c)
 
 

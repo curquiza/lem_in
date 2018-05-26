@@ -65,24 +65,6 @@ int		is_valid_input(char *line, t_parsing *data)
 
 }
 
-void	add_room_to_anthill(char *line, t_graph *anthill, int special_room)
-{
-	(void)line;
-	(void)anthill;
-	(void)special_room;
-
-	//ajouter un maillon à la liste chainée des rooms
-}
-
-void	add_tube_to_anthill(char *line, t_graph *anthill)
-{
-	(void)line;
-	(void)anthill;
-
-	//check le nom
-	//ajouter à la matrice adjacence si ok
-}
-
 void	add_input_to_anthill(char *line, t_parsing *data, t_graph *anthill)
 {
 	if (data->rooms_done == 0)

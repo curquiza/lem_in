@@ -60,7 +60,20 @@ int		is_valid_tube(char *line)
 	return (1);
 }
 
-int		is_valid_input(char *line, t_parsing *data)
+void	create_adj_matrix(t_graph *anthill, t_parsing *data)
+{
+	int		i;
+
+	anthill->adj_matrix = ft_memalloc(sizeof(*anthill->adj_matrix) * data->rooms_nb);
+	i = 0;
+	while (i < data->rooms_nb)
+	{
+		anthill->adj_matrix[i] = ft_memalloc(sizeof(**anthill->adj_matrix) * data->rooms_nb);
+		i++;
+	}
+}
+
+int		is_valid_input(char *line, t_graph *anthill, t_parsing *data)
 {
 	if (data->rooms_reading_done == 0)
 	{
@@ -69,6 +82,7 @@ int		is_valid_input(char *line, t_parsing *data)
 		else if (is_valid_tube(line))
 		{
 			data->rooms_reading_done = 1;
+			create_adj_matrix(anthill, data);
 			//creer matrice adjacence
 			//creer tableau des rooms
 			return (1);
@@ -122,7 +136,7 @@ void	get_rooms_and_tubes(t_graph *anthill, t_parsing *data)
 		}
 		else if (!is_comment(line))
 		{
-			if (!is_valid_input(line, data))
+			if (!is_valid_input(line, anthill, data))
 			{
 				record_input_line(&line, data);
 				return ;

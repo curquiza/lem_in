@@ -1,0 +1,17 @@
+Ligne non conforme qui arrête la lecture :
+- pas de nombre de fourmi
+- une ligne de fourmis qui n'est pas strictement un digit inférieur à 10 000 000.
+- une room qui n'a pas le format "name coord coord" peu importe le nombre d'espaces
+  seul l'espace est considéré comme un séparateur.
+- une room dont le nom commence par un L ou contient un '-'
+- un tube qui n'a pas le format "salle1-salle2". Tout autre format est considéré comme faux.
+  l'espace est considéré comme un séparateur, donc faux sur cette ligne.
+  tout autre caractère (hors '-') fait parti du nom de la room.
+  ex : salle1 - salle2 -> faux
+       salle1-salle2 12 13 -> faux
+       salle1-salle2-salle3 -> faux
+- un tube dont les noms de salle n'existent pas n'est pas considéré comme non conforme
+- un ##start ou ##end dans les tubes
+- un ##start ou ##end alors qu'un premier start/end a déjà été enregistré
+- un ##start ou ##end qui n'est pas suivi par une ligne de room valide.
+  ex : suivi par un commentaire -> faux

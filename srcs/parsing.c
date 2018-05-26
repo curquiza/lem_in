@@ -147,7 +147,10 @@ int		parser(t_graph *anthill)
 
 	ft_bzero(&data, sizeof(t_parsing));
 	if (get_ants_number(anthill, &data) != 0)
+	{
+		ft_strdel(&data.input);
 		return (-1);
+	}
 	get_rooms_and_tubes(anthill, &data);
 	//continuer de lire jusqu'à la fin
 	if (data.input) // && assign_weight(anthill) != -1

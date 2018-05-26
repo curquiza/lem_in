@@ -121,13 +121,12 @@ int		parser(t_graph *anthill)
 	}
 	get_rooms_and_tubes(anthill, &data);
 	read_end_of_inputs(&data);
-	if (data.input && assign_weight(anthill, &data) != -1)
-		write(1, data.input, ft_strlen(data.input));
-	else
+	if (!data.input || assign_weight(anthill, &data) == -1)
 	{
 		ft_strdel(&data.input);
 		return (-1);
 	}
+	write(1, data.input, ft_strlen(data.input));
 	ft_strdel(&data.input);
 	return (0);
 }

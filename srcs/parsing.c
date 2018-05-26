@@ -41,19 +41,23 @@ int		is_valid_tube(char *line)
 	ft_tabdel(&tube_data);
 	tube_data = ft_strsplit(line, '-');
 	if (!tube_data || ft_tablen(tube_data) != 2)
+	{
+		ft_tabdel(&tube_data);
 		return (0);
+	}
+	ft_tabdel(&tube_data);
 	return (1);
 }
 
 int		is_valid_input(char *line, t_parsing *data)
 {
-	if (data->rooms_done == 0)
+	if (data->rooms_reading_done == 0)
 	{
 		if (is_valid_room(line))
 			return (1);
 		else if (is_valid_tube(line))
 		{
-			data->rooms_done = 1;
+			data->rooms_reading_done = 1;
 			//creer matrice adjacence
 			//creer tableau des rooms
 			return (1);
@@ -67,8 +71,8 @@ int		is_valid_input(char *line, t_parsing *data)
 
 void	add_input_to_anthill(char *line, t_parsing *data, t_graph *anthill)
 {
-	if (data->rooms_done == 0)
-		add_room_to_anthill(line, anthill, 0);
+	if (data->rooms_reading_done == 0)
+		add_room_to_anthill(line, anthill, data, 0);
 	else
 		add_tube_to_anthill(line, anthill);
 }
@@ -79,7 +83,7 @@ int		manage_valid_command(char **line, t_parsing *data, t_graph *anthill)
 
 	command = is_end_command(*line) ? 'e' : 's';
 	record_input_line(line, data);
-	if (data->rooms_done == 1
+	if (data->rooms_reading_done == 1
 		|| (command == 'e' && data->end == 1)
 		|| (command == 's' && data->start == 1))
 		return (-1);
@@ -90,7 +94,7 @@ int		manage_valid_command(char **line, t_parsing *data, t_graph *anthill)
 		record_input_line(line, data);
 		return (-1);
 	}
-	add_room_to_anthill(*line, anthill, command);
+	add_room_to_anthill(*line, anthill, data, command);
 	return (0);
 }
 
@@ -125,8 +129,10 @@ int		parser(t_graph *anthill)
 
 	ft_bzero(&data, sizeof(t_parsing));
 	if (get_ants_number(anthill, &data) != 0)
+	{
 		//continuer de lire jusqu'à la fin
 		return (-1);
+	}
 	get_rooms_and_tubes(anthill, &data);
 	//continuer de lire jusqu'à la fin
 	//check si presence de end et de start

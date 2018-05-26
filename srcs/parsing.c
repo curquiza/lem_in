@@ -98,6 +98,11 @@ void	get_rooms_and_tubes(t_graph *anthill, t_parsing *data)
 // 	int		i;
 //
 // 	i = 0;
+// 	if (!rooms)
+// 	{
+// 		putendl("no room");
+// 		return;
+// 	}
 // 	while (i < anthill->rooms_nb)
 // 	{
 // 		ft_putstr("id : ");
@@ -106,7 +111,7 @@ void	get_rooms_and_tubes(t_graph *anthill, t_parsing *data)
 // 		ft_putendl(rooms[i]->name);
 // 		ft_putstr("special room : ");
 // 		ft_putchar(rooms[i]->special_room ? rooms[i]->special_room : '0');
-// 		ft_putendl("");m
+// 		ft_putendl("");
 // 		ft_putstr("weight : ");
 // 		ft_putnbr_endl(rooms[i]->weight);
 // 		ft_putendl("");
@@ -133,5 +138,6 @@ int		parser(t_graph *anthill)
 	}
 	write(1, data.input, ft_strlen(data.input));
 	ft_strdel(&data.input);
+	// ft_put_all_rooms(anthill->rooms_array, anthill);
 	return (0);
 }

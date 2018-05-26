@@ -49,15 +49,17 @@ t_room	*ft_room_lstnew(char *name, int special_room, int index)
 	return (new);
 }
 
-void	add_room_to_anthill(char *line, t_graph *anthill, t_parsing *data, int special_room)
+void	add_room_to_anthill(char *line, t_graph *anthill, t_parsing *data,
+							int special_room)
 {
 	char	*name;
 	char 	**infos;
 
 	infos = ft_strsplit(line, ' ');
 	name = infos[0];
-	ft_room_lstadd_back(&anthill->rooms_list, ft_room_lstnew(name, special_room, data->rooms_nb));
-	data->rooms_nb += 1;
+	ft_room_lstadd_back(&anthill->rooms_list, ft_room_lstnew(name, special_room,
+															anthill->rooms_nb));
+	anthill->rooms_nb += 1;
 	if (special_room == 'e')
 		data->end = 1;
 	else if (special_room == 's')
@@ -65,12 +67,13 @@ void	add_room_to_anthill(char *line, t_graph *anthill, t_parsing *data, int spec
 	ft_tabdel(&infos);
 }
 
-void	create_rooms_array(t_graph *anthill, t_parsing *data)
+void	create_rooms_array(t_graph *anthill)
 {
 	int		i;
 	t_room	*tmp;
 
-	anthill->rooms_array = ft_memalloc(sizeof(*anthill->rooms_array) * data->rooms_nb);
+	anthill->rooms_array = ft_memalloc(sizeof(*anthill->rooms_array)
+										* anthill->rooms_nb);
 	tmp = anthill->rooms_list;
 	i = 0;
 	while (tmp)

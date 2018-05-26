@@ -9,8 +9,8 @@ int		is_valid_input(char *line, t_graph *anthill, t_parsing *data)
 		else if (is_valid_tube(line))
 		{
 			data->rooms_reading_done = 1;
-			create_adj_matrix(anthill, data);
-			create_rooms_array(anthill, data);
+			create_adj_matrix(anthill);
+			create_rooms_array(anthill);
 			return (1);
 		}
 		return (0);
@@ -24,7 +24,7 @@ void	add_input_to_anthill(char *line, t_parsing *data, t_graph *anthill)
 	if (data->rooms_reading_done == 0)
 		add_room_to_anthill(line, anthill, data, 0);
 	else
-		add_tube_to_anthill(line, anthill, data);
+		add_tube_to_anthill(line, anthill);
 }
 
 int		manage_valid_command(char **line, t_parsing *data, t_graph *anthill)
@@ -73,16 +73,16 @@ void	get_rooms_and_tubes(t_graph *anthill, t_parsing *data)
 	}
 }
 
-// void	ft_put_adj_matrix(int **tab, t_parsing *data)
+// void	ft_put_adj_matrix(int **tab, t_graph *anthill)
 // {
 // 	int		i;
 // 	int		j;
 //
 // 	i = 0;
-// 	while (i < data->rooms_nb)
+// 	while (i < anthill->rooms_nb)
 // 	{
 // 		j = 0;
-// 		while (j < data->rooms_nb)
+// 		while (j < anthill->rooms_nb)
 // 		{
 // 			ft_putnbr(tab[i][j]);
 // 			ft_putchar(' ');
@@ -93,17 +93,22 @@ void	get_rooms_and_tubes(t_graph *anthill, t_parsing *data)
 // 	}
 // }
 //
-// void	ft_put_all_rooms(t_room **rooms, t_parsing *data)
+// void	ft_put_all_rooms(t_room **rooms, t_graph *anthill)
 // {
 // 	int		i;
 //
 // 	i = 0;
-// 	while (i < data->rooms_nb)
+// 	while (i < anthill->rooms_nb)
 // 	{
 // 		ft_putstr("id : ");
 // 		ft_putnbr_endl(rooms[i]->id);
 // 		ft_putstr("name : ");
 // 		ft_putendl(rooms[i]->name);
+// 		ft_putstr("special room : ");
+// 		ft_putchar(rooms[i]->special_room ? rooms[i]->special_room : '0');
+// 		ft_putendl("");m
+// 		ft_putstr("weight : ");
+// 		ft_putnbr_endl(rooms[i]->weight);
 // 		ft_putendl("");
 // 		i++;
 // 	}
@@ -121,7 +126,7 @@ int		parser(t_graph *anthill)
 	}
 	get_rooms_and_tubes(anthill, &data);
 	read_end_of_inputs(&data);
-	if (!data.input || assign_weight(anthill, &data) == -1)
+	if (!data.input || assign_weights(anthill, &data) == -1)
 	{
 		ft_strdel(&data.input);
 		return (-1);

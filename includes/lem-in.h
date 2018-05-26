@@ -27,7 +27,8 @@ typedef struct	s_parsing
 	char	*input;
 	int		start;
 	int		end;
-	int		rooms_done;
+	int		rooms_nb;
+	int		rooms_reading_done;
 }				t_parsing;
 
 int		is_start_command(char *line);
@@ -40,7 +41,7 @@ void	record_input_line(char **line, t_parsing *data);
 int		get_ants_number(t_graph *anthill, t_parsing *data);
 int		parser(t_graph *anthill);
 
-void	add_room_to_anthill(char *line, t_graph *anthill, int special_room);
+void	add_room_to_anthill(char *line, t_graph *anthill, t_parsing *data, int special_room);
 void	add_tube_to_anthill(char *line, t_graph *anthill);
 
 #endif

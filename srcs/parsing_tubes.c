@@ -1,6 +1,6 @@
 #include "lem-in.h"
 
-int		is_valid_tube(char *line)
+int			is_valid_tube(char *line)
 {
 	char	**tube_data;
 
@@ -21,7 +21,7 @@ int		is_valid_tube(char *line)
 	return (1);
 }
 
-void	create_adj_matrix(t_graph *anthill, t_parsing *data)
+void		create_adj_matrix(t_graph *anthill, t_parsing *data)
 {
 	int		i;
 
@@ -34,11 +34,35 @@ void	create_adj_matrix(t_graph *anthill, t_parsing *data)
 	}
 }
 
-void	add_tube_to_anthill(char *line, t_graph *anthill)
+/*
+** Returns room id if found. Otherwise, returns -1
+*/
+static int	get_room_id(char *name, t_graph *anthill, t_parsing *data)
 {
-	(void)line;
-	(void)anthill;
+	int		i;
 
-	//check le nom
-	//ajouter à la matrice adjacence si ok
+	i = 0;
+	while (i < data->rooms_nb)
+	{
+		if (!ft_strcmp(anthill->rooms_array[i]->name, name))
+			return (anthill->rooms_array[i]->id);
+		i++;
+	}
+	return (-1);
+}
+
+void		add_tube_to_anthill(char *line, t_graph *anthill, t_parsing *data)
+{
+	char	**tubes;
+	int		room_1;
+	int		room_2;
+
+	tubes = ft_strsplit(line, '-');
+	if ((room_1 = get_room_id(tubes[0], anthill, data) != -1)
+		&& (room_2 = get_room_id(tubes[1], anthill, data)) != -1)
+	{
+		anthill->adj_matrix[room_1][room_2] = 1;
+		anthill->adj_matrix[room_2][room_1] = 1;
+	}
+	ft_tabdel(&tubes);
 }

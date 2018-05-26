@@ -24,7 +24,7 @@ void	add_input_to_anthill(char *line, t_parsing *data, t_graph *anthill)
 	if (data->rooms_reading_done == 0)
 		add_room_to_anthill(line, anthill, data, 0);
 	else
-		add_tube_to_anthill(line, anthill);
+		add_tube_to_anthill(line, anthill, data);
 }
 
 int		manage_valid_command(char **line, t_parsing *data, t_graph *anthill)

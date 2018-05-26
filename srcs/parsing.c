@@ -25,10 +25,17 @@ int		is_valid_room(char *line)
 
 	room_data = ft_strsplit(line, ' ');
 	if (!room_data || ft_tablen(room_data) != 3)
+	{
+		ft_tabdel(&room_data);
 		return (0);
+	}
 	if (room_data[0][0] == 'L' || ft_strchr(room_data[0], '-')
 		|| !str_is_digit(room_data[1]) || !str_is_digit(room_data[2]))
+	{
+		ft_tabdel(&room_data);
 		return (0);
+	}
+	ft_tabdel(&room_data);
 	return (1);
 }
 
@@ -38,7 +45,10 @@ int		is_valid_tube(char *line)
 
 	tube_data = ft_strsplit(line, ' ');
 	if (!tube_data || ft_tablen(tube_data) != 1)
+	{
+		ft_tabdel(&tube_data);
 		return (0);
+	}
 	ft_tabdel(&tube_data);
 	tube_data = ft_strsplit(line, '-');
 	if (!tube_data || ft_tablen(tube_data) != 2)
@@ -67,7 +77,6 @@ int		is_valid_input(char *line, t_parsing *data)
 	}
 	else
 		return (is_valid_tube(line));
-
 }
 
 void	add_input_to_anthill(char *line, t_parsing *data, t_graph *anthill)
@@ -95,6 +104,7 @@ int		manage_valid_command(char **line, t_parsing *data, t_graph *anthill)
 		record_input_line(line, data);
 		return (-1);
 	}
+	// (void)anthill;
 	add_room_to_anthill(*line, anthill, data, command);
 	return (0);
 }

@@ -1,94 +1,5 @@
 #include "lem-in.h"
 
-void	record_input_line(char **line, t_parsing *data)
-{
-	char	*buff;
-	int		old_len;
-	int		line_len;
-
-	line_len = *line ? ft_strlen(*line) : 0;
-	old_len = data->input ? ft_strlen(data->input) : 0;
-	buff = data->input;
-	data->input = ft_strnew(old_len + line_len + 1);
-	if (buff)
-		ft_strcpy(data->input, buff);
-	if (*line)
-		ft_strcpy(data->input + old_len, *line);
-	data->input[old_len + line_len] = '\n';
-	ft_strdel(line);
-	ft_strdel(&buff);
-}
-
-int		is_valid_room(char *line)
-{
-	char	**room_data;
-
-	room_data = ft_strsplit(line, ' ');
-	if (!room_data || ft_tablen(room_data) != 3)
-	{
-		ft_tabdel(&room_data);
-		return (0);
-	}
-	if (room_data[0][0] == 'L' || ft_strchr(room_data[0], '-')
-		|| !str_is_digit(room_data[1]) || !str_is_digit(room_data[2]))
-	{
-		ft_tabdel(&room_data);
-		return (0);
-	}
-	ft_tabdel(&room_data);
-	return (1);
-}
-
-int		is_valid_tube(char *line)
-{
-	char	**tube_data;
-
-	tube_data = ft_strsplit(line, ' ');
-	if (!tube_data || ft_tablen(tube_data) != 1)
-	{
-		ft_tabdel(&tube_data);
-		return (0);
-	}
-	ft_tabdel(&tube_data);
-	tube_data = ft_strsplit(line, '-');
-	if (!tube_data || ft_tablen(tube_data) != 2)
-	{
-		ft_tabdel(&tube_data);
-		return (0);
-	}
-	ft_tabdel(&tube_data);
-	return (1);
-}
-
-void	create_adj_matrix(t_graph *anthill, t_parsing *data)
-{
-	int		i;
-
-	anthill->adj_matrix = ft_memalloc(sizeof(*anthill->adj_matrix) * data->rooms_nb);
-	i = 0;
-	while (i < data->rooms_nb)
-	{
-		anthill->adj_matrix[i] = ft_memalloc(sizeof(**anthill->adj_matrix) * data->rooms_nb);
-		i++;
-	}
-}
-
-void	create_rooms_array(t_graph *anthill, t_parsing *data)
-{
-	int		i;
-	t_room	*tmp;
-
-	anthill->rooms_array = ft_memalloc(sizeof(*anthill->rooms_array) * data->rooms_nb);
-	tmp = anthill->rooms_list;
-	i = 0;
-	while (tmp)
-	{
-		anthill->rooms_array[i] = tmp;
-		tmp = tmp->next;
-		i++;
-	}
-}
-
 int		is_valid_input(char *line, t_graph *anthill, t_parsing *data)
 {
 	if (data->rooms_reading_done == 0)
@@ -162,14 +73,6 @@ void	get_rooms_and_tubes(t_graph *anthill, t_parsing *data)
 	}
 }
 
-int		assign_weight(t_graph *anthill)
-{
-	(void)anthill;
-	//check si presence de end et de start
-	//repartir les poids des salles => check au passage si un path existe
-	return (0);
-}
-
 int		parser(t_graph *anthill)
 {
 	t_parsing	data;
@@ -184,6 +87,11 @@ int		parser(t_graph *anthill)
 	//continuer de lire jusqu'à la fin
 	if (data.input) // && assign_weight(anthill) != -1
 		write(1, data.input, ft_strlen(data.input));
+	else
+	{
+		ft_strdel(&data.input);
+		return (-1);
+	}
 	ft_strdel(&data.input);
 	return (0);
 }

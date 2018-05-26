@@ -37,11 +37,18 @@ int		is_valid_command(char *line);
 int		is_comment(char *line);
 int		str_is_digit(char *str);
 
-void	record_input_line(char **line, t_parsing *data);
 int		get_ants_number(t_graph *anthill, t_parsing *data);
-int		parser(t_graph *anthill);
-
+int		is_valid_room(char *line);
+int		is_valid_tube(char *line);
+void	create_rooms_array(t_graph *anthill, t_parsing *data);
+void	create_adj_matrix(t_graph *anthill, t_parsing *data);
 void	add_room_to_anthill(char *line, t_graph *anthill, t_parsing *data, int special_room);
 void	add_tube_to_anthill(char *line, t_graph *anthill);
+
+void	record_input_line(char **line, t_parsing *data);
+
+int		assign_weight(t_graph *anthill);
+
+int		parser(t_graph *anthill);
 
 #endif

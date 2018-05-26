@@ -17,9 +17,7 @@ t_room	*ft_room_lstnew(char *name, int special_room, int index)
 {
 	t_room		*new;
 
-	if (!(new = (t_room *)malloc(sizeof(*new))))
-		ft_exit("malloc error", 1);
-	ft_bzero(new, sizeof(*new));
+	new = ft_memalloc(sizeof(*new));
 	new->name = ft_strdup(name);
 	new->special_room = special_room;
 	new->id = index;

@@ -6,9 +6,9 @@ void	record_input_line(char **line, t_parsing *data)
 	int		old_len;
 	int		line_len;
 
-	buff = data->input;
 	line_len = *line ? ft_strlen(*line) : 0;
 	old_len = data->input ? ft_strlen(data->input) : 0;
+	buff = data->input;
 	data->input = ft_strnew(old_len + line_len);
 	if (buff)
 		ft_strcpy(data->input, buff);
@@ -123,19 +123,25 @@ void	get_rooms_and_tubes(t_graph *anthill, t_parsing *data)
 	}
 }
 
+int		assign_weight(t_graph *anthill)
+{
+	(void)anthill;
+	//check si presence de end et de start
+	//repartir les poids des salles => check au passage si un path existe
+	return (0);
+}
+
 int		parser(t_graph *anthill)
 {
 	t_parsing	data;
 
 	ft_bzero(&data, sizeof(t_parsing));
 	if (get_ants_number(anthill, &data) != 0)
-	{
-		//continuer de lire jusqu'à la fin
 		return (-1);
-	}
 	get_rooms_and_tubes(anthill, &data);
 	//continuer de lire jusqu'à la fin
-	//check si presence de end et de start
-	//repartir les poids des salles => check au passage si un path existe
+	if (data.input) // && assign_weight(anthill) != -1
+		write(1, data.input, ft_strlen(data.input));
+	ft_strdel(&data.input);
 	return (0);
 }

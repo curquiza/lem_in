@@ -83,7 +83,6 @@ int		is_valid_input(char *line, t_graph *anthill, t_parsing *data)
 		{
 			data->rooms_reading_done = 1;
 			create_adj_matrix(anthill, data);
-			//creer matrice adjacence
 			//creer tableau des rooms
 			return (1);
 		}

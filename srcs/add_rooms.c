@@ -1,15 +1,20 @@
 #include "lem-in.h"
 
-void	ft_room_lstadd(t_room **alst, t_room *new)
+
+void	ft_room_lstadd_back(t_room **alst, t_room *new)
 {
-	if (!alst)
+	t_room	*tmp;
+
+	if (alst == NULL)
 		return ;
-	else if (*alst == NULL)
+	tmp = *alst;
+	if (*alst == NULL)
 		*alst = new;
 	else
 	{
-		new->next = *alst;
-		*alst = new;
+		while (tmp->next)
+			tmp = tmp->next;
+		tmp->next = new;
 	}
 }
 
@@ -32,7 +37,7 @@ void	add_room_to_anthill(char *line, t_graph *anthill, t_parsing *data, int spec
 
 	infos = ft_strsplit(line, ' ');
 	name = infos[0];
-	ft_room_lstadd(&anthill->rooms_list, ft_room_lstnew(name, special_room, data->rooms_nb));
+	ft_room_lstadd_back(&anthill->rooms_list, ft_room_lstnew(name, special_room, data->rooms_nb));
 	data->rooms_nb += 1;
 	ft_tabdel(&infos);
 }

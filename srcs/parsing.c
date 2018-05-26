@@ -73,6 +73,22 @@ void	create_adj_matrix(t_graph *anthill, t_parsing *data)
 	}
 }
 
+void	create_rooms_array(t_graph *anthill, t_parsing *data)
+{
+	int		i;
+	t_room	*tmp;
+
+	anthill->rooms_array = ft_memalloc(sizeof(*anthill->rooms_array) * data->rooms_nb);
+	tmp = anthill->rooms_list;
+	i = 0;
+	while (tmp)
+	{
+		anthill->rooms_array[i] = tmp;
+		tmp = tmp->next;
+		i++;
+	}
+}
+
 int		is_valid_input(char *line, t_graph *anthill, t_parsing *data)
 {
 	if (data->rooms_reading_done == 0)
@@ -83,7 +99,7 @@ int		is_valid_input(char *line, t_graph *anthill, t_parsing *data)
 		{
 			data->rooms_reading_done = 1;
 			create_adj_matrix(anthill, data);
-			//creer tableau des rooms
+			create_rooms_array(anthill, data);
 			return (1);
 		}
 		return (0);

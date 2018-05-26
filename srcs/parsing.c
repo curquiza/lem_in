@@ -27,7 +27,7 @@ int		is_valid_room(char *line)
 	if (!room_data || ft_tablen(room_data) != 3)
 		return (0);
 	if (room_data[0][0] == 'L' || ft_strchr(room_data[0], '-')
-		|| !str_is_digit(room_data[1]) || str_is_digit(room_data[2]))
+		|| !str_is_digit(room_data[1]) || !str_is_digit(room_data[2]))
 		return (0);
 	return (1);
 }

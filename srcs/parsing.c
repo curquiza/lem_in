@@ -73,6 +73,42 @@ void	get_rooms_and_tubes(t_graph *anthill, t_parsing *data)
 	}
 }
 
+// void	ft_put_adj_matrix(int **tab, t_parsing *data)
+// {
+// 	int		i;
+// 	int		j;
+//
+// 	i = 0;
+// 	while (i < data->rooms_nb)
+// 	{
+// 		j = 0;
+// 		while (j < data->rooms_nb)
+// 		{
+// 			ft_putnbr(tab[i][j]);
+// 			ft_putchar(' ');
+// 			j++;
+// 		}
+// 		ft_putendl("");
+// 		i++;
+// 	}
+// }
+//
+// void	ft_put_all_rooms(t_room **rooms, t_parsing *data)
+// {
+// 	int		i;
+//
+// 	i = 0;
+// 	while (i < data->rooms_nb)
+// 	{
+// 		ft_putstr("id : ");
+// 		ft_putnbr_endl(rooms[i]->id);
+// 		ft_putstr("name : ");
+// 		ft_putendl(rooms[i]->name);
+// 		ft_putendl("");
+// 		i++;
+// 	}
+// }
+
 int		parser(t_graph *anthill)
 {
 	t_parsing	data;
@@ -84,8 +120,8 @@ int		parser(t_graph *anthill)
 		return (-1);
 	}
 	get_rooms_and_tubes(anthill, &data);
-	//continuer de lire jusqu'à la fin
-	if (data.input) // && assign_weight(anthill) != -1
+	read_end_of_inputs(&data);
+	if (data.input && assign_weight(anthill, &data) != -1)
 		write(1, data.input, ft_strlen(data.input));
 	else
 	{

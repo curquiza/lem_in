@@ -58,6 +58,10 @@ void	add_room_to_anthill(char *line, t_graph *anthill, t_parsing *data, int spec
 	name = infos[0];
 	ft_room_lstadd_back(&anthill->rooms_list, ft_room_lstnew(name, special_room, data->rooms_nb));
 	data->rooms_nb += 1;
+	if (special_room == 'e')
+		data->end = 1;
+	else if (special_room == 's')
+		data->start = 1;
 	ft_tabdel(&infos);
 }
 

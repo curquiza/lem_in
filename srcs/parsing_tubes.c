@@ -58,7 +58,7 @@ void		add_tube_to_anthill(char *line, t_graph *anthill, t_parsing *data)
 	int		room_2;
 
 	tubes = ft_strsplit(line, '-');
-	if ((room_1 = get_room_id(tubes[0], anthill, data) != -1)
+	if ((room_1 = get_room_id(tubes[0], anthill, data)) != -1
 		&& (room_2 = get_room_id(tubes[1], anthill, data)) != -1)
 	{
 		anthill->adj_matrix[room_1][room_2] = 1;

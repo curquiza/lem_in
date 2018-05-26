@@ -47,8 +47,9 @@ void	add_room_to_anthill(char *line, t_graph *anthill, t_parsing *data,
 void	add_tube_to_anthill(char *line, t_graph *anthill, t_parsing *data);
 
 void	record_input_line(char **line, t_parsing *data);
+void 	read_end_of_inputs(t_parsing *data);
 
-int		assign_weight(t_graph *anthill);
+int		assign_weight(t_graph *anthill, t_parsing *data);
 
 int		parser(t_graph *anthill);
 

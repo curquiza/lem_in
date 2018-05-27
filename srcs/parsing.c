@@ -1,25 +1,6 @@
 #include "lem-in.h"
 
-int		is_valid_input(char *line, t_graph *anthill, t_parsing *data)
-{
-	if (data->rooms_reading_done == 0)
-	{
-		if (is_valid_room(line))
-			return (1);
-		else if (is_valid_tube(line))
-		{
-			data->rooms_reading_done = 1;
-			create_adj_matrix(anthill);
-			create_rooms_array(anthill);
-			return (1);
-		}
-		return (0);
-	}
-	else
-		return (is_valid_tube(line));
-}
-
-void	add_input_to_anthill(char *line, t_parsing *data, t_graph *anthill)
+static void	add_input_to_anthill(char *line, t_parsing *data, t_graph *anthill)
 {
 	if (data->rooms_reading_done == 0)
 		add_room_to_anthill(line, anthill, data, 0);
@@ -27,7 +8,7 @@ void	add_input_to_anthill(char *line, t_parsing *data, t_graph *anthill)
 		add_tube_to_anthill(line, anthill);
 }
 
-int		manage_valid_command(char **line, t_parsing *data, t_graph *anthill)
+static int	manage_valid_command(char **line, t_parsing *data, t_graph *anthill)
 {
 	int		command;
 
@@ -48,7 +29,7 @@ int		manage_valid_command(char **line, t_parsing *data, t_graph *anthill)
 	return (0);
 }
 
-void	get_rooms_and_tubes(t_graph *anthill, t_parsing *data)
+static void	get_rooms_and_tubes(t_graph *anthill, t_parsing *data)
 {
 	char	*line;
 
@@ -119,7 +100,7 @@ void	get_rooms_and_tubes(t_graph *anthill, t_parsing *data)
 // 	}
 // }
 
-int		parser(t_graph *anthill)
+int			parser(t_graph *anthill)
 {
 	t_parsing	data;
 

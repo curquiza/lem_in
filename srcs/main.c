@@ -46,6 +46,21 @@ void	ft_put_all_rooms(t_room **rooms, t_graph *anthill)
 	}
 }
 
+void ft_put_rooms_list(t_room *rooms)
+{
+	ft_putendl("--------------------");
+	while (rooms)
+	{
+		ft_putstr("name: ");
+		ft_putendl(rooms->name);
+		ft_putstr("weight: ");
+		ft_putnbr_endl(rooms->weight);
+		ft_putendl("------");
+		rooms = rooms->next;
+	}
+	ft_putendl("--------------------");
+}
+
 int		main(void)
 {
 	t_graph	anthill;
@@ -59,7 +74,10 @@ int		main(void)
 		ret = 1;
 	}
 	else
+	{
 		algo(&anthill);
+		ft_put_rooms_list(anthill.rooms_list);
+	}
 	del_anthill(&anthill);
 	// while(1);
 	return (ret);

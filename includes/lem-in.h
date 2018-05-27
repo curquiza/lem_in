@@ -63,7 +63,7 @@ int		parser(t_graph *anthill);
 /*
 ** ALGO
 */
-
+void	algo(t_graph *anthill);
 
 /*
 ** DEL

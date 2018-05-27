@@ -13,6 +13,7 @@ class bcolors:
 
 MAPS = {
     'mini_map_1':                  {'error': False, 'rounds': 7},
+    'mini_map_2':                  {'error': False, 'rounds': 7},
     'multi_ways_1':                {'error': False, 'rounds': 6},
     'multi_ways_2':                {'error': False, 'rounds': 8},
     'multi_ways_2_bis':            {'error': False, 'rounds': 8},

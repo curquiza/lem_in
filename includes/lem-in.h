@@ -20,6 +20,9 @@ typedef struct	s_graph
 	t_room	**rooms_array;
 	t_room	*rooms_list;
 	int		**adj_matrix;
+	int		ants_in_end;
+	int		ants_in_start;
+	int		next_ant;
 
 }				t_graph;
 

@@ -74,10 +74,7 @@ int		main(void)
 		ret = 1;
 	}
 	else
-	{
 		algo(&anthill);
-		ft_put_rooms_list(anthill.rooms_list);
-	}
 	del_anthill(&anthill);
 	// while(1);
 	return (ret);

@@ -41,6 +41,8 @@ int		is_valid_command(char *line);
 int		is_comment(char *line);
 int		str_is_digit(char *str);
 
+t_room	*get_special_room(t_graph *anthill, int special_room);
+
 /*
 ** PARSING
 */

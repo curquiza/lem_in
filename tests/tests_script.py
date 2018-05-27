@@ -13,6 +13,7 @@ class bcolors:
 
 MAPS = {
     'mini_map_1':                  {'error': False, 'rounds': 7},
+    'mini_map_2':                  {'error': False, 'rounds': 7},
     'multi_ways_1':                {'error': False, 'rounds': 6},
     'multi_ways_2':                {'error': False, 'rounds': 8},
     'multi_ways_2_bis':            {'error': False, 'rounds': 8},
@@ -24,9 +25,9 @@ MAPS = {
     'no_path_2':                   {'error': True,  'rounds': 0},
     'parsing_big_nb_of_ants':      {'error': True,  'rounds': 0},
     'parsing_comment_1':           {'error': False, 'rounds': 8},
-    'parsing_comment_2':           {'error': False, 'rounds': 8},
+    'parsing_comment_2':           {'error': True,  'rounds': 0},
     'parsing_comment_3':           {'error': False, 'rounds': 8},
-    'parsing_comment_4':           {'error': False, 'rounds': 8},
+    'parsing_comment_4':           {'error': True,  'rounds': 8},
     'parsing_comment_5':           {'error': False, 'rounds': 8},
     'parsing_comment_6':           {'error': False, 'rounds': 8},
     'parsing_comment_7':           {'error': False, 'rounds': 8},

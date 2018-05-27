@@ -1,92 +1,28 @@
 #include "lem-in.h"
 
-void	record_input_line(char **line, t_parsing *data)
+int		is_valid_input(char *line, t_graph *anthill, t_parsing *data)
 {
-	char	*buff;
-	int		old_len;
-	int		line_len;
-
-	buff = data->input;
-	line_len = *line ? ft_strlen(*line) : 0;
-	old_len = data->input ? ft_strlen(data->input) : 0;
-	data->input = ft_strnew(old_len + line_len);
-	if (buff)
-		ft_strcpy(data->input, buff);
-	if (*line)
-		ft_strcpy(data->input + old_len, *line);
-	ft_strdel(line);
-	ft_strdel(&buff);
-}
-
-int		is_valid_room(char *line)
-{
-	char	**room_data;
-
-	room_data = ft_strsplit(line, ' ');
-	if (!room_data || ft_tablen(room_data) != 3)
-		return (0);
-	if (room_data[0][0] == 'L' || ft_strchr(room_data[0], '-')
-		|| !str_is_digit(room_data[1]) || str_is_digit(room_data[2]))
-		return (0);
-	return (1);
-}
-
-int		is_valid_tube(char *line)
-{
-	char	**tube_data;
-
-	tube_data = ft_strsplit(line, ' ');
-	if (!tube_data || ft_tablen(tube_data) != 1)
-		return (0);
-	ft_tabdel(&tube_data);
-	tube_data = ft_strsplit(line, '-');
-	if (!tube_data || ft_tablen(tube_data) != 2)
-		return (0);
-	return (1);
-}
-
-int		is_valid_input(char *line, t_parsing *data)
-{
-	if (data->rooms_done == 0)
+	if (data->rooms_reading_done == 0)
 	{
 		if (is_valid_room(line))
 			return (1);
 		else if (is_valid_tube(line))
 		{
-			data->rooms_done = 1;
-			//creer matrice adjacence
-			//creer tableau des rooms
+			data->rooms_reading_done = 1;
+			create_adj_matrix(anthill);
+			create_rooms_array(anthill);
 			return (1);
 		}
 		return (0);
 	}
 	else
 		return (is_valid_tube(line));
-
-}
-
-void	add_room_to_anthill(char *line, t_graph *anthill, int special_room)
-{
-	(void)line;
-	(void)anthill;
-	(void)special_room;
-
-	//ajouter un maillon à la liste chainée des rooms
-}
-
-void	add_tube_to_anthill(char *line, t_graph *anthill)
-{
-	(void)line;
-	(void)anthill;
-
-	//check le nom
-	//ajouter à la matrice adjacence si ok
 }
 
 void	add_input_to_anthill(char *line, t_parsing *data, t_graph *anthill)
 {
-	if (data->rooms_done == 0)
-		add_room_to_anthill(line, anthill, 0);
+	if (data->rooms_reading_done == 0)
+		add_room_to_anthill(line, anthill, data, 0);
 	else
 		add_tube_to_anthill(line, anthill);
 }
@@ -97,7 +33,7 @@ int		manage_valid_command(char **line, t_parsing *data, t_graph *anthill)
 
 	command = is_end_command(*line) ? 'e' : 's';
 	record_input_line(line, data);
-	if (data->rooms_done == 1
+	if (data->rooms_reading_done == 1
 		|| (command == 'e' && data->end == 1)
 		|| (command == 's' && data->start == 1))
 		return (-1);
@@ -108,7 +44,7 @@ int		manage_valid_command(char **line, t_parsing *data, t_graph *anthill)
 		record_input_line(line, data);
 		return (-1);
 	}
-	add_room_to_anthill(*line, anthill, command);
+	add_room_to_anthill(*line, anthill, data, command);
 	return (0);
 }
 
@@ -126,7 +62,7 @@ void	get_rooms_and_tubes(t_graph *anthill, t_parsing *data)
 		}
 		else if (!is_comment(line))
 		{
-			if (!is_valid_input(line, data))
+			if (!is_valid_input(line, anthill, data))
 			{
 				record_input_line(&line, data);
 				return ;
@@ -137,17 +73,71 @@ void	get_rooms_and_tubes(t_graph *anthill, t_parsing *data)
 	}
 }
 
+// void	ft_put_adj_matrix(int **tab, t_graph *anthill)
+// {
+// 	int		i;
+// 	int		j;
+//
+// 	i = 0;
+// 	while (i < anthill->rooms_nb)
+// 	{
+// 		j = 0;
+// 		while (j < anthill->rooms_nb)
+// 		{
+// 			ft_putnbr(tab[i][j]);
+// 			ft_putchar(' ');
+// 			j++;
+// 		}
+// 		ft_putendl("");
+// 		i++;
+// 	}
+// }
+//
+// void	ft_put_all_rooms(t_room **rooms, t_graph *anthill)
+// {
+// 	int		i;
+//
+// 	i = 0;
+// 	if (!rooms)
+// 	{
+// 		ft_putendl("no room");
+// 		return;
+// 	}
+// 	while (i < anthill->rooms_nb)
+// 	{
+// 		ft_putstr("id : ");
+// 		ft_putnbr_endl(rooms[i]->id);
+// 		ft_putstr("name : ");
+// 		ft_putendl(rooms[i]->name);
+// 		ft_putstr("special room : ");
+// 		ft_putchar(rooms[i]->special_room ? rooms[i]->special_room : '0');
+// 		ft_putendl("");
+// 		ft_putstr("weight : ");
+// 		ft_putnbr_endl(rooms[i]->weight);
+// 		ft_putendl("");
+// 		i++;
+// 	}
+// }
+
 int		parser(t_graph *anthill)
 {
 	t_parsing	data;
 
 	ft_bzero(&data, sizeof(t_parsing));
 	if (get_ants_number(anthill, &data) != 0)
-		//continuer de lire jusqu'à la fin
+	{
+		ft_strdel(&data.input);
 		return (-1);
+	}
 	get_rooms_and_tubes(anthill, &data);
-	//continuer de lire jusqu'à la fin
-	//check si presence de end et de start
-	//repartir les poids des salles => check au passage si un path existe
+	read_end_of_inputs(&data);
+	if (!data.input || assign_weights(anthill, &data) == -1)
+	{
+		ft_strdel(&data.input);
+		return (-1);
+	}
+	write(1, data.input, ft_strlen(data.input));
+	ft_strdel(&data.input);
+	// ft_put_all_rooms(anthill->rooms_array, anthill);
 	return (0);
 }

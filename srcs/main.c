@@ -8,7 +8,9 @@ int		main(void)
 	if (parser(&anthill) != 0)
 	{
 		ft_putendl_fd("ERROR", 2);
+		// while(1);
 		return(1);
 	}
+	// while(1);
 	return (0);
 }

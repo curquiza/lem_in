@@ -111,12 +111,12 @@ int			parser(t_graph *anthill)
 		return (-1);
 	}
 	get_rooms_and_tubes(anthill, &data);
-	read_end_of_inputs(&data);
 	if (!data.input || assign_weights(anthill, &data) == -1)
 	{
 		ft_strdel(&data.input);
 		return (-1);
 	}
+	read_end_of_inputs(&data);
 	write(1, data.input, ft_strlen(data.input));
 	ft_strdel(&data.input);
 	// ft_put_all_rooms(anthill->rooms_array, anthill);

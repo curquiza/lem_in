@@ -73,6 +73,5 @@ int			parser(t_graph *anthill)
 	read_end_of_inputs(&data);
 	write(1, data.input, ft_strlen(data.input));
 	ft_strdel(&data.input);
-	// ft_put_all_rooms(anthill->rooms_array, anthill);
 	return (0);
 }

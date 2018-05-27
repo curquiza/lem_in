@@ -1,39 +1,5 @@
 #include "lem-in.h"
 
-int			is_valid_tube(char *line)
-{
-	char	**tube_data;
-
-	tube_data = ft_strsplit(line, ' ');
-	if (!tube_data || ft_tablen(tube_data) != 1)
-	{
-		ft_tabdel(&tube_data);
-		return (0);
-	}
-	ft_tabdel(&tube_data);
-	tube_data = ft_strsplit(line, '-');
-	if (!tube_data || ft_tablen(tube_data) != 2)
-	{
-		ft_tabdel(&tube_data);
-		return (0);
-	}
-	ft_tabdel(&tube_data);
-	return (1);
-}
-
-void		create_adj_matrix(t_graph *anthill)
-{
-	int		i;
-
-	anthill->adj_matrix = ft_memalloc(sizeof(*anthill->adj_matrix) * anthill->rooms_nb);
-	i = 0;
-	while (i < anthill->rooms_nb)
-	{
-		anthill->adj_matrix[i] = ft_memalloc(sizeof(**anthill->adj_matrix) * anthill->rooms_nb);
-		i++;
-	}
-}
-
 /*
 ** Returns room id if found. Otherwise, returns -1
 */

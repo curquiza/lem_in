@@ -7,19 +7,19 @@ static t_room	*switch_rooms(t_room *room_1, t_room *rooms_2)
 	return (rooms_2);
 }
 
-static t_room	*sort_rooms(t_room *room)
+static t_room	*sort_rooms(t_room *rooms)
 {
-	if (!room)
+	if (!rooms)
 		return (NULL);
-	if (room->next && room->weight > room->next->weight)
-		room = switch_rooms(room, room->next);
-	room->next = sort_rooms(room->next);
-	if (room->next && room->weight > room->next->weight)
+	if (rooms->next && rooms->next->weight < rooms->weight)
+		rooms = switch_rooms(rooms, rooms->next);
+	rooms->next = sort_rooms(rooms->next);
+	if (rooms->next && rooms->next->weight < rooms->weight)
 	{
-		room = switch_rooms(room, room->next);
-		room->next = sort_rooms(room->next);
+		rooms = switch_rooms(rooms, rooms->next);
+		rooms->next = sort_rooms(rooms->next);
 	}
-	return (room);
+	return (rooms);
 }
 
 void	algo(t_graph *anthill)

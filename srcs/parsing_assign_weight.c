@@ -23,11 +23,7 @@ static void	assign_weight_on(t_room *room, int weight, t_graph *anthill)
 		if (anthill->adj_matrix[room->id][j] == 1
 			&& (anthill->rooms_array[j]->weight == 0
 				|| anthill->rooms_array[j]->weight > weight))
-		{
-			ft_putstr("poids : ");
-			ft_putnbr_endl(anthill->rooms_array[j]->weight);
 			assign_weight_on(anthill->rooms_array[j], weight + 1, anthill);
-		}
 		j++;
 	}
 }

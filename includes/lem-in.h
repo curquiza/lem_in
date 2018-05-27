@@ -28,7 +28,6 @@ typedef struct	s_parsing
 	char	*input;
 	int		start;
 	int		end;
-	// int		rooms_nb;
 	int		rooms_reading_done;
 }				t_parsing;
 

@@ -24,8 +24,6 @@ void 	read_end_of_inputs(t_parsing *data)
 	char	*line;
 
 	line = NULL;
-	while (get_next_line(0, &line) != 1 && line)
+	while (get_next_line(0, &line) == 1 && line)
 		record_input_line(&line, data);
 }
-
-//fonction pour continuer de lire

@@ -1,6 +1,6 @@
 #include "lem-in.h"
 
-t_room	*get_special_room(t_graph *anthill, int special_room)
+t_room		*get_special_room(t_graph *anthill, int special_room)
 {
 	int		i;
 
@@ -10,7 +10,7 @@ t_room	*get_special_room(t_graph *anthill, int special_room)
 	return (anthill->rooms_array[i]);
 }
 
-void	assign_weight_on(t_room *room, int weight, t_graph *anthill)
+static void	assign_weight_on(t_room *room, int weight, t_graph *anthill)
 {
 	int		j;
 
@@ -32,7 +32,7 @@ void	assign_weight_on(t_room *room, int weight, t_graph *anthill)
 	}
 }
 
-int		assign_weights(t_graph *anthill, t_parsing *data)
+int			assign_weights(t_graph *anthill, t_parsing *data)
 {
 	t_room	*start;
 

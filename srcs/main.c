@@ -11,7 +11,6 @@ int		main(void)
 	{
 		ft_putendl_fd("ERROR", 2);
 		ret = 1;
-		// while(1);
 	}
 	del_anthill(&anthill);
 	// while(1);

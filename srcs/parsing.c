@@ -100,7 +100,7 @@ void	get_rooms_and_tubes(t_graph *anthill, t_parsing *data)
 // 	i = 0;
 // 	if (!rooms)
 // 	{
-// 		putendl("no room");
+// 		ft_putendl("no room");
 // 		return;
 // 	}
 // 	while (i < anthill->rooms_nb)

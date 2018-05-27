@@ -12,5 +12,6 @@ int		main(void)
 		return(1);
 	}
 	// while(1);
+	del_anthill(&anthill);
 	return (0);
 }

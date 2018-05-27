@@ -13,6 +13,7 @@ C_FILES = $(addprefix $(C_DIR)/, \
 			parsing_tubes.c \
 			parsing_input_reading.c \
 			parsing_assign_weight.c \
+			del_anthill.c \
 			main.c)
 
 

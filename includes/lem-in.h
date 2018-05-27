@@ -54,4 +54,6 @@ int		assign_weights(t_graph *anthill, t_parsing *data);
 
 int		parser(t_graph *anthill);
 
+void	del_anthill(t_graph *anthill);
+
 #endif

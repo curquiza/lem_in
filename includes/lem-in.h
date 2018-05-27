@@ -20,6 +20,9 @@ typedef struct	s_graph
 	t_room	**rooms_array;
 	t_room	*rooms_list;
 	int		**adj_matrix;
+	int		ants_in_end;
+	int		ants_in_start;
+	int		next_ant;
 
 }				t_graph;
 
@@ -28,7 +31,6 @@ typedef struct	s_parsing
 	char	*input;
 	int		start;
 	int		end;
-	// int		rooms_nb;
 	int		rooms_reading_done;
 }				t_parsing;
 
@@ -64,7 +66,7 @@ int		parser(t_graph *anthill);
 /*
 ** ALGO
 */
-
+void	algo(t_graph *anthill);
 
 /*
 ** DEL

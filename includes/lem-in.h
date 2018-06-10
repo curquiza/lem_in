@@ -29,9 +29,16 @@ typedef struct	s_graph
 
 }				t_graph;
 
+typedef struct	s_input
+{
+	char			*line;
+	struct s_input	*next;
+}				t_input;
+
 typedef struct	s_parsing
 {
-	char	*input;
+	t_input	*input;
+	t_input	*last;
 	int		start;
 	int		end;
 	int		rooms_reading_done;
@@ -61,6 +68,7 @@ void	add_tube_to_anthill(char *line, t_graph *anthill);
 
 void	record_input_line(char **line, t_parsing *data);
 void 	read_end_of_inputs(t_parsing *data);
+void	del_input_list(t_input **alst);
 
 int		assign_weights(t_graph *anthill, t_parsing *data);
 

@@ -54,6 +54,15 @@ static void	get_rooms_and_tubes(t_graph *anthill, t_parsing *data)
 	}
 }
 
+static void write_input(t_input *lst)
+{
+	while (lst)
+	{
+		ft_putendl(lst->line);
+		lst = lst->next;
+	}
+}
+
 int			parser(t_graph *anthill)
 {
 	t_parsing	data;
@@ -61,17 +70,17 @@ int			parser(t_graph *anthill)
 	ft_bzero(&data, sizeof(t_parsing));
 	if (get_ants_number(anthill, &data) != 0)
 	{
-		ft_strdel(&data.input);
+		del_input_list(&data.input);
 		return (-1);
 	}
 	get_rooms_and_tubes(anthill, &data);
 	if (!data.input || assign_weights(anthill, &data) == -1)
 	{
-		ft_strdel(&data.input);
+		del_input_list(&data.input);
 		return (-1);
 	}
 	read_end_of_inputs(&data);
-	write(1, data.input, ft_strlen(data.input));
-	ft_strdel(&data.input);
+	write_input(data.input);
+	del_input_list(&data.input);
 	return (0);
 }

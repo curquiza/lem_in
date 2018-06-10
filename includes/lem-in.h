@@ -38,7 +38,8 @@ typedef struct	s_input
 typedef struct	s_parsing
 {
 	t_input	*input;
-	t_input	*last;
+	t_input	*last_input;
+	t_room	*last_room;
 	int		start;
 	int		end;
 	int		rooms_reading_done;

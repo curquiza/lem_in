@@ -46,8 +46,8 @@ void	record_input_line(char **line, t_parsing *data)
 	t_input	*new;
 
 	new = input_new(*line);
-	input_add_back(&data->input, new, data->last);
-	data->last = new;
+	input_add_back(&data->input, new, data->last_input);
+	data->last_input = new;
 	ft_strdel(line);
 }
 

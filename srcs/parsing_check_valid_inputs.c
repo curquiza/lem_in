@@ -1,6 +1,6 @@
 #include "lem-in.h"
 
-int			is_valid_tube(char *line)
+bool		is_valid_tube(char *line)
 {
 	char	*tmp;
 
@@ -10,35 +10,35 @@ int			is_valid_tube(char *line)
 		|| !(tmp = ft_strchr(line, '-'))
 		|| tmp != ft_strrchr(line, '-')
 		|| !*(tmp + 1))
-		return (0);
-	return (1);
+		return (false);
+	return (true);
 }
 
-int			is_valid_room(char *line)
+bool		is_valid_room(char *line)
 {
 	char	*tmp;
 
 	if (!line || line[0] == 'L' || ft_strchr(line, '-'))
-		return (0);
+		return (false);
 	if (!(tmp = ft_strchr(line, ' ')))
-		return (0);
+		return (false);
 	line = tmp + 1;
 	while (*line && *line != ' ')
 	{
 		if (!ft_isdigit(*line))
-			return (0);
+			return (false);
 		line++;
 	}
 	if (!*line)
-		return (0);
+		return (false);
 	line++;
 	while (*line)
 	{
 		if (!ft_isdigit(*line))
-			return (0);
+			return (false);
 		line++;
 	}
-	return (1);
+	return (true);
 }
 
 static void	create_rooms_array(t_graph *anthill)
@@ -71,20 +71,20 @@ void static	create_adj_matrix(t_graph *anthill)
 	}
 }
 
-int			is_valid_input(char *line, t_graph *anthill, t_parsing *data)
+bool		is_valid_input(char *line, t_graph *anthill, t_parsing *data)
 {
 	if (data->rooms_reading_done == 0)
 	{
 		if (is_valid_room(line))
-			return (1);
+			return (true);
 		else if (is_valid_tube(line))
 		{
 			data->rooms_reading_done = 1;
 			create_adj_matrix(anthill);
 			create_rooms_array(anthill);
-			return (1);
+			return (true);
 		}
-		return (0);
+		return (false);
 	}
 	else
 		return (is_valid_tube(line));

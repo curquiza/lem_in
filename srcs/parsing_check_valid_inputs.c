@@ -2,22 +2,15 @@
 
 int			is_valid_tube(char *line)
 {
-	char	**tube_data;
+	char	*tmp;
 
-	tube_data = ft_strsplit(line, ' ');
-	if (!tube_data || ft_tablen(tube_data) != 1)
-	{
-		ft_tabdel(&tube_data);
+	if (!line
+		|| *line == '-'
+		|| ft_strchr(line, ' ')
+		|| !(tmp = ft_strchr(line, '-'))
+		|| tmp != ft_strrchr(line, '-')
+		|| !*(tmp + 1))
 		return (0);
-	}
-	ft_tabdel(&tube_data);
-	tube_data = ft_strsplit(line, '-');
-	if (!tube_data || ft_tablen(tube_data) != 2)
-	{
-		ft_tabdel(&tube_data);
-		return (0);
-	}
-	ft_tabdel(&tube_data);
 	return (1);
 }
 

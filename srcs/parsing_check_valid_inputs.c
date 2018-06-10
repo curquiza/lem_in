@@ -23,21 +23,28 @@ int			is_valid_tube(char *line)
 
 int			is_valid_room(char *line)
 {
-	char	**room_data;
+	char	*tmp;
 
-	room_data = ft_strsplit(line, ' ');
-	if (!room_data || ft_tablen(room_data) != 3)
-	{
-		ft_tabdel(&room_data);
+	if (!line || line[0] == 'L' || ft_strchr(line, '-'))
 		return (0);
-	}
-	if (room_data[0][0] == 'L' || ft_strchr(room_data[0], '-')
-		|| !str_is_digit(room_data[1]) || !str_is_digit(room_data[2]))
-	{
-		ft_tabdel(&room_data);
+	if (!(tmp = ft_strchr(line, ' ')))
 		return (0);
+	line = tmp + 1;
+	while (*line && *line != ' ')
+	{
+		if (!ft_isdigit(*line))
+			return (0);
+		line++;
 	}
-	ft_tabdel(&room_data);
+	if (!*line)
+		return (0);
+	line++;
+	while (*line)
+	{
+		if (!ft_isdigit(*line))
+			return (0);
+		line++;
+	}
 	return (1);
 }
 

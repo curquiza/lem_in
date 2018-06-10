@@ -14,17 +14,16 @@ static void	assign_weight_on(t_room *room, int weight, t_graph *anthill)
 {
 	int		j;
 
-	room->weight = weight;
-	if (room->special_room == START)
-		return ;
-	j = 0;
-	while (j < anthill->rooms_nb)
+	if (room->weight == 0 || room->weight > weight)
 	{
-		if (anthill->adj_matrix[room->id][j] == 1
-			&& (anthill->rooms_array[j]->weight == 0
-				|| anthill->rooms_array[j]->weight > weight))
-			assign_weight_on(anthill->rooms_array[j], weight + 1, anthill);
-		j++;
+		room->weight = weight;
+		j = 0;
+		while (j < anthill->rooms_nb)
+		{
+			if (anthill->adj_matrix[room->id][j] == 1)
+				assign_weight_on(anthill->rooms_array[j], weight + 1, anthill);
+			j++;
+		}
 	}
 }
 

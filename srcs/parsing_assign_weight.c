@@ -15,7 +15,7 @@ static void	assign_weight_on(t_room *room, int weight, t_graph *anthill)
 	int		j;
 
 	room->weight = weight;
-	if (room->special_room == 's')
+	if (room->special_room == START)
 		return ;
 	j = 0;
 	while (j < anthill->rooms_nb)
@@ -34,8 +34,8 @@ int			assign_weights(t_graph *anthill, t_parsing *data)
 
 	if (!anthill->rooms_array || !data->start || !data->end)
 		return (-1);
-	assign_weight_on(get_special_room(anthill, 'e'), 1, anthill);
-	start = get_special_room(anthill, 's');
+	assign_weight_on(get_special_room(anthill, END), 1, anthill);
+	start = get_special_room(anthill, START);
 	if (!start->weight)
 		return (-1);
 	return (0);

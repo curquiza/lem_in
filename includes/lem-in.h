@@ -2,12 +2,15 @@
 # define LEM_IN_H
 
 # include "libft.h"
+# define START 0
+# define END 1
+
 
 typedef struct	s_room
 {
 	int				id;
 	char			*name;
-	int				special_room; // 'e' ou 's'
+	int				special_room;
 	int				weight;
 	int				ant;
 	struct s_room	*next;

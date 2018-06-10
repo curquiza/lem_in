@@ -37,7 +37,7 @@ t_room	*best_room_to_choose(t_room *current, t_graph *anthill)
 	while (j < anthill->rooms_nb)
 	{
 		if (anthill->adj_matrix[current->id][j]
-			&& anthill->rooms_array[j]->special_room != 's'
+			&& anthill->rooms_array[j]->special_room != START
 			&& anthill->rooms_array[j]->weight != 0
 			&& anthill->rooms_array[j]->ant == 0
 			&& anthill->rooms_array[j]->weight <= current->weight)
@@ -62,12 +62,12 @@ void	move_ant(t_room *from, t_room *dest, int ant, t_graph *anthill)
 		ft_putchar('-');
 		ft_putstr(dest->name);
 		ft_putchar(' ');
-		if (dest->special_room == 'e')
+		if (dest->special_room == END)
 			anthill->ants_in_end += 1;
 		else
 			dest->ant = ant;
 		from->ant = 0;
-		if (from->special_room == 's')
+		if (from->special_room == START)
 		{
 			anthill->next_ant += 1;
 			anthill->ants_in_start -= 1;
@@ -95,7 +95,7 @@ void	move_in_start_room(t_graph *anthill)
 
 	if (start_is_empty(anthill))
 		return ;
-	start = get_special_room(anthill, 's');
+	start = get_special_room(anthill, START);
 	best_way = best_room_to_choose(start, anthill);
 	move_ant(start, best_way, anthill->next_ant, anthill);
 	while (best_way && !(start_is_empty(anthill))
@@ -114,7 +114,7 @@ void	move_in_anthill(t_graph *anthill)
 	room = anthill->rooms_list;
 	while (room)
 	{
-		if (room->ant && room->special_room != 's')
+		if (room->ant && room->special_room != START)
 		{
 			// ft_putendl2_fd("room name = ", room->name, 1);
 			best_way = best_room_to_choose(room, anthill);

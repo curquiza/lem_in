@@ -12,11 +12,11 @@ static int	manage_valid_command(char **line, t_parsing *data, t_graph *anthill)
 {
 	int		command;
 
-	command = is_end_command(*line) ? 'e' : 's';
+	command = is_end_command(*line) ? END : START;
 	record_input_line(line, data);
 	if (data->rooms_reading_done == 1
-		|| (command == 'e' && data->end == 1)
-		|| (command == 's' && data->start == 1))
+		|| (command == END && data->end == 1)
+		|| (command == START && data->start == 1))
 		return (-1);
 	if (get_next_line(0, line) != 1 || !line)
 		return (-1);

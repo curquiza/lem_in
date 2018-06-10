@@ -2,8 +2,8 @@
 # define LEM_IN_H
 
 # include "libft.h"
-# define START 0
-# define END 1
+# define START 1
+# define END 2
 
 
 typedef struct	s_room

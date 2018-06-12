@@ -27,28 +27,29 @@ static t_room	*sort_rooms(t_room *rooms)
 ** - no ant in the next room
 ** - next room weight is lower than the current one
 */
-t_room	*best_room_to_choose(t_room *current, t_graph *anthill)
+static t_room	*best_room_to_choose(t_room *current)
 {
-	int		j;
+	t_list	*link;
 	t_room	*best;
+	t_room	*tmp_room;
 
 	best = NULL;
-	j = 0;
-	while (j < anthill->rooms_nb)
+	link = current->links;
+	while (link)
 	{
-		if (anthill->adj_matrix[current->id][j]
-			&& anthill->rooms_array[j]->special_room != START
-			&& anthill->rooms_array[j]->weight != 0
-			&& anthill->rooms_array[j]->ant == 0
-			&& anthill->rooms_array[j]->weight <= current->weight)
+		tmp_room = (t_room *)link->content;
+		if (tmp_room->special_room != START
+			&& tmp_room->weight != 0
+			&& tmp_room->ant == 0
+			&& tmp_room->weight <= current->weight)
 		{
 			if (!best
-				|| (best && anthill->rooms_array[j]->weight < best->weight))
+				|| (best && tmp_room->weight < best->weight))
 			{
-				best = anthill->rooms_array[j];
+				best = tmp_room;
 			}
 		}
-		j++;
+		link = link->next;
 	}
 	return (best);
 }
@@ -96,10 +97,10 @@ void	move_in_start_room(t_graph *anthill)
 	if (start_is_empty(anthill))
 		return ;
 	start = get_special_room(anthill, START);
-	best_way = best_room_to_choose(start, anthill);
+	best_way = best_room_to_choose(start);
 	move_ant(start, best_way, anthill->next_ant, anthill);
 	while (best_way && !(start_is_empty(anthill))
-			&& (other_way = best_room_to_choose(start, anthill))
+			&& (other_way = best_room_to_choose(start))
 			&& is_favorable_start_to(other_way, best_way, anthill))
 	{
 		move_ant(start, other_way, anthill->next_ant, anthill);
@@ -116,8 +117,7 @@ void	move_in_anthill(t_graph *anthill)
 	{
 		if (room->ant && room->special_room != START)
 		{
-			// ft_putendl2_fd("room name = ", room->name, 1);
-			best_way = best_room_to_choose(room, anthill);
+			best_way = best_room_to_choose(room);
 			move_ant(room, best_way, room->ant, anthill);
 		}
 		room = room->next;
@@ -138,7 +138,5 @@ void	algo(t_graph *anthill)
 		// ft_putnbr2("next ants : ", anthill->next_ant);
 		move_in_anthill(anthill);
 		ft_putchar('\n');
-		// if (anthill->ants_in_end == 6)
-		// 	break;
 	}
 }

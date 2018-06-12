@@ -14,6 +14,7 @@ typedef struct	s_room
 	int				special_room;
 	int				weight;
 	int				ant;
+	t_list			*links;
 	struct s_room	*next;
 }				t_room;
 
@@ -23,7 +24,6 @@ typedef struct	s_graph
 	int		rooms_nb;
 	t_room	**rooms_array;
 	t_room	*rooms_list;
-	int		**adj_matrix;
 	int		ants_in_end;
 	int		ants_in_start;
 	int		next_ant;

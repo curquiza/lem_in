@@ -58,19 +58,6 @@ static void	create_rooms_array(t_graph *anthill)
 	}
 }
 
-void static	create_adj_matrix(t_graph *anthill)
-{
-	int		i;
-
-	anthill->adj_matrix = ft_memalloc(sizeof(*anthill->adj_matrix) * anthill->rooms_nb);
-	i = 0;
-	while (i < anthill->rooms_nb)
-	{
-		anthill->adj_matrix[i] = ft_memalloc(sizeof(**anthill->adj_matrix) * anthill->rooms_nb);
-		i++;
-	}
-}
-
 bool		is_valid_input(char *line, t_graph *anthill, t_parsing *data)
 {
 	if (data->rooms_reading_done == 0)
@@ -80,7 +67,6 @@ bool		is_valid_input(char *line, t_graph *anthill, t_parsing *data)
 		else if (is_valid_tube(line))
 		{
 			data->rooms_reading_done = 1;
-			create_adj_matrix(anthill);
 			create_rooms_array(anthill);
 			return (true);
 		}

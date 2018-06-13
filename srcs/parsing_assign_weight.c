@@ -12,19 +12,17 @@ t_room		*get_special_room(t_graph *anthill, int special_room)
 
 static void	assign_weight_on(t_room *room, int weight, t_graph *anthill)
 {
-	int		j;
+	t_list	*link;
 
-	room->weight = weight;
-	if (room->special_room == 's')
-		return ;
-	j = 0;
-	while (j < anthill->rooms_nb)
+	if (room->weight == 0 || room->weight > weight)
 	{
-		if (anthill->adj_matrix[room->id][j] == 1
-			&& (anthill->rooms_array[j]->weight == 0
-				|| anthill->rooms_array[j]->weight > weight))
-			assign_weight_on(anthill->rooms_array[j], weight + 1, anthill);
-		j++;
+		room->weight = weight;
+		link = room->links;
+		while (link)
+		{
+			assign_weight_on(link->content, weight + 1, anthill);
+			link = link->next;
+		}
 	}
 }
 
@@ -34,8 +32,8 @@ int			assign_weights(t_graph *anthill, t_parsing *data)
 
 	if (!anthill->rooms_array || !data->start || !data->end)
 		return (-1);
-	assign_weight_on(get_special_room(anthill, 'e'), 1, anthill);
-	start = get_special_room(anthill, 's');
+	assign_weight_on(get_special_room(anthill, END), 1, anthill);
+	start = get_special_room(anthill, START);
 	if (!start->weight)
 		return (-1);
 	return (0);

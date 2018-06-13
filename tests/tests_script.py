@@ -12,6 +12,8 @@ class bcolors:
     UNDERLINE = '\033[4m'
 
 MAPS = {
+    'map_42':                      {'error': False, 'rounds': 62},
+    'map_1000':                    {'error': False, 'rounds': 1},
     'mini_map_1':                  {'error': False, 'rounds': 7},
     'mini_map_2':                  {'error': False, 'rounds': 7},
     'multi_ways_1':                {'error': False, 'rounds': 6},

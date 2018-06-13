@@ -1,44 +1,44 @@
 #include "lem-in.h"
 
-int			is_valid_tube(char *line)
+bool		is_valid_tube(char *line)
 {
-	char	**tube_data;
+	char	*tmp;
 
-	tube_data = ft_strsplit(line, ' ');
-	if (!tube_data || ft_tablen(tube_data) != 1)
-	{
-		ft_tabdel(&tube_data);
-		return (0);
-	}
-	ft_tabdel(&tube_data);
-	tube_data = ft_strsplit(line, '-');
-	if (!tube_data || ft_tablen(tube_data) != 2)
-	{
-		ft_tabdel(&tube_data);
-		return (0);
-	}
-	ft_tabdel(&tube_data);
-	return (1);
+	if (!line
+		|| *line == '-'
+		|| ft_strchr(line, ' ')
+		|| !(tmp = ft_strchr(line, '-'))
+		|| tmp != ft_strrchr(line, '-')
+		|| !*(tmp + 1))
+		return (false);
+	return (true);
 }
 
-int			is_valid_room(char *line)
+bool		is_valid_room(char *line)
 {
-	char	**room_data;
+	char	*tmp;
 
-	room_data = ft_strsplit(line, ' ');
-	if (!room_data || ft_tablen(room_data) != 3)
+	if (!line || line[0] == 'L' || ft_strchr(line, '-'))
+		return (false);
+	if (!(tmp = ft_strchr(line, ' ')))
+		return (false);
+	line = tmp + 1;
+	while (*line && *line != ' ')
 	{
-		ft_tabdel(&room_data);
-		return (0);
+		if (!ft_isdigit(*line))
+			return (false);
+		line++;
 	}
-	if (room_data[0][0] == 'L' || ft_strchr(room_data[0], '-')
-		|| !str_is_digit(room_data[1]) || !str_is_digit(room_data[2]))
+	if (!*line)
+		return (false);
+	line++;
+	while (*line)
 	{
-		ft_tabdel(&room_data);
-		return (0);
+		if (!ft_isdigit(*line))
+			return (false);
+		line++;
 	}
-	ft_tabdel(&room_data);
-	return (1);
+	return (true);
 }
 
 static void	create_rooms_array(t_graph *anthill)
@@ -58,33 +58,19 @@ static void	create_rooms_array(t_graph *anthill)
 	}
 }
 
-void static	create_adj_matrix(t_graph *anthill)
-{
-	int		i;
-
-	anthill->adj_matrix = ft_memalloc(sizeof(*anthill->adj_matrix) * anthill->rooms_nb);
-	i = 0;
-	while (i < anthill->rooms_nb)
-	{
-		anthill->adj_matrix[i] = ft_memalloc(sizeof(**anthill->adj_matrix) * anthill->rooms_nb);
-		i++;
-	}
-}
-
-int			is_valid_input(char *line, t_graph *anthill, t_parsing *data)
+bool		is_valid_input(char *line, t_graph *anthill, t_parsing *data)
 {
 	if (data->rooms_reading_done == 0)
 	{
 		if (is_valid_room(line))
-			return (1);
+			return (true);
 		else if (is_valid_tube(line))
 		{
 			data->rooms_reading_done = 1;
-			create_adj_matrix(anthill);
 			create_rooms_array(anthill);
-			return (1);
+			return (true);
 		}
-		return (0);
+		return (false);
 	}
 	else
 		return (is_valid_tube(line));

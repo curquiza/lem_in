@@ -1,25 +1,5 @@
 #include "lem-in.h"
 
-void	ft_put_adj_matrix(int **tab, t_graph *anthill)
-{
-	int		i;
-	int		j;
-
-	i = 0;
-	while (i < anthill->rooms_nb)
-	{
-		j = 0;
-		while (j < anthill->rooms_nb)
-		{
-			ft_putnbr(tab[i][j]);
-			ft_putchar(' ');
-			j++;
-		}
-		ft_putendl("");
-		i++;
-	}
-}
-
 void	ft_put_all_rooms(t_room **rooms, t_graph *anthill)
 {
 	int		i;

@@ -1,22 +1,54 @@
 #include "lem-in.h"
 
+static void	input_add_back(t_input **alst, t_input *new, t_input *last)
+{
+	t_input	*tmp;
+
+	if (!alst)
+		return ;
+	tmp = *alst;
+	if (*alst == NULL)
+		*alst = new;
+	else
+		last->next = new;
+}
+
+static t_input	*input_new(char *line)
+{
+	t_input		*new;
+
+	new = ft_memalloc(sizeof(*new));
+	new->line = ft_strdup(line);
+	new->next = NULL;
+	return (new);
+}
+
+void	del_input_list(t_input **alst)
+{
+	t_input	*current;
+	t_input	*tmp;
+
+	if (!alst)
+		return ;
+	current = *alst;
+	while (current)
+	{
+		tmp = current;
+		ft_strdel(&current->line);
+		current = current->next;
+		free(tmp);
+	}
+	*alst = NULL;
+}
+
 void	record_input_line(char **line, t_parsing *data)
 {
-	char	*buff;
-	int		old_len;
-	int		line_len;
+	t_input	*new;
 
-	line_len = *line ? ft_strlen(*line) : 0;
-	old_len = data->input ? ft_strlen(data->input) : 0;
-	buff = data->input;
-	data->input = ft_strnew(old_len + line_len + 1);
-	if (buff)
-		ft_strcpy(data->input, buff);
-	if (*line)
-		ft_strcpy(data->input + old_len, *line);
-	data->input[old_len + line_len] = '\n';
+	new = input_new(*line);
+	input_add_back(&data->input, new, data->last_input);
+	data->last_input = new;
 	ft_strdel(line);
-	ft_strdel(&buff);
 }
 
 void 	read_end_of_inputs(t_parsing *data)

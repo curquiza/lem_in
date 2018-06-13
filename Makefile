@@ -1,8 +1,7 @@
 NAME = lem-in
 
-#CC = gcc
 CC = gcc -Wall -Wextra -Werror
-#CC = gcc -Wall -Wextra -Werror -g -fsanitize=address
+# CC = gcc -Wall -Wextra -Werror -g -fsanitize=address
 
 C_DIR = srcs
 C_FILES = $(addprefix $(C_DIR)/, \

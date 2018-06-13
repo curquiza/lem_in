@@ -139,7 +139,7 @@ def print_rslt(filename, output):
         print_for_algo_case(filename, output)
 
 def manage_error_returns(filename, output, returncode):
-    if returncode != -1 and returncode != 1:
+    if returncode != 255 and returncode != 1:
         bad_returncode_msg(output)
         return
     if expects_error_msg_for(filename):
@@ -174,30 +174,35 @@ def count_rounds(output):
 
 # --- MAIN ----------------
 
-all_files = sorted(os.listdir('maps/'))
-maps = [f for f in all_files if f.endswith('.txt')]
-
-for map in maps:
-    filename = os.path.splitext(map)[0]
-    put(filename + ' ')
-    if filename not in MAPS:
-        print bcolors.WARNING + 'Data not found for this map' + bcolors.ENDC
-        continue
-    try:
-        output = subprocess.check_output(['./lem-in < maps/' + map], shell=True, stderr=subprocess.STDOUT)
-    except subprocess.CalledProcessError as exc:
-        manage_error_returns(filename, exc.output, exc.returncode)
-    else:
-        print_rslt(filename, output)
-
-# maps = sorted(os.listdir('maps/cedric/tests/'))
+# all_files = sorted(os.listdir('maps/'))
+# maps = [f for f in all_files if f.endswith('.txt')]
 #
 # for map in maps:
 #     filename = os.path.splitext(map)[0]
 #     put(filename + ' ')
+#     if filename not in MAPS:
+#         print bcolors.WARNING + 'Data not found for this map' + bcolors.ENDC
+#         continue
 #     try:
-#         output = subprocess.check_output(['./lem-in < maps/cedric/tests/' + map], shell=True, stderr=subprocess.STDOUT)
+#         output = subprocess.check_output(['./lem-in < maps/' + map], shell=True, stderr=subprocess.STDOUT)
 #     except subprocess.CalledProcessError as exc:
-#         bad_returncode_msg(exc.output)
+#         manage_error_returns(filename, exc.output, exc.returncode)
 #     else:
-#         ok_msg()
+#         print_rslt(filename, output)
+
+maps = sorted(os.listdir('maps/cedric/tests/'))
+
+for map in maps:
+    filename = os.path.splitext(map)[0]
+    put(filename + ' ')
+    try:
+        output = subprocess.check_output(['./lem-in < maps/cedric/tests/' + map], shell=True, stderr=subprocess.STDOUT)
+    except subprocess.CalledProcessError as exc:
+        if exc.returncode != 255 and exc.returncode != 1:
+            bad_returncode_msg(exc.output)
+        else:
+            ok_msg()
+            print "  rounds -> " + str(count_rounds(exc.output))
+    else:
+        ok_msg()
+        print "  rounds -> " + str(count_rounds(output))

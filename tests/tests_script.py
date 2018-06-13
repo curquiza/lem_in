@@ -34,6 +34,7 @@ MAPS = {
     'parsing_comment_6':           {'error': False, 'rounds': 8},
     'parsing_comment_7':           {'error': False, 'rounds': 8},
     'parsing_comment_8':           {'error': False, 'rounds': 8},
+    'parsing_comment_in_ants':     {'error': False, 'rounds': 1},
     'parsing_empty_1':             {'error': True,  'rounds': 0},
     'parsing_empty_2':             {'error': True,  'rounds': 0},
     'parsing_empty_3':             {'error': True,  'rounds': 0},
@@ -41,9 +42,13 @@ MAPS = {
     'parsing_empty_line_2':        {'error': True,  'rounds': 0},
     'parsing_empty_line_3':        {'error': False, 'rounds': 8},
     'parsing_empty_line_4':        {'error': False, 'rounds': 9},
+    'parsing_neg_coord':           {'error': True,  'rounds': 0},
     'parsing_no_ant':              {'error': True,  'rounds': 0},
     'parsing_no_end':              {'error': True,  'rounds': 0},
     'parsing_no_start':            {'error': True,  'rounds': 0},
+    'parsing_round_tube':          {'error': False, 'rounds': 15},
+    'parsing_same_room_name_1':    {'error': True,  'rounds': 0},
+    'parsing_same_room_name_2':    {'error': True,  'rounds': 0},
     'parsing_no_start_no_end':     {'error': True,  'rounds': 0},
     'parsing_starts_in_tubes_1':   {'error': True,  'rounds': 0},
     'parsing_starts_in_tubes_2':   {'error': False, 'rounds': 9},
@@ -57,6 +62,8 @@ MAPS = {
     'parsing_wrong_ants_line_2':   {'error': True,  'rounds': 0},
     'parsing_wrong_ants_line_3':   {'error': True,  'rounds': 0},
     'parsing_wrong_ants_line_4':   {'error': True,  'rounds': 0},
+    'parsing_wrong_ants_line_5':   {'error': True,  'rounds': 0},
+    'parsing_wrong_ants_line_6':   {'error': True,  'rounds': 0},
     'parsing_wrong_coord':         {'error': True,  'rounds': 0},
     'parsing_wrong_end_1':         {'error': True,  'rounds': 0},
     'parsing_wrong_end_2':         {'error': True,  'rounds': 0},
@@ -70,10 +77,12 @@ MAPS = {
     'parsing_wrong_room_5':        {'error': True,  'rounds': 0},
     'parsing_wrong_room_6':        {'error': False, 'rounds': 8},
     'parsing_wrong_room_7':        {'error': True,  'rounds': 0},
+    'parsing_wrong_room_8':        {'error': True,  'rounds': 0},
     'parsing_wrong_start_1':       {'error': True,  'rounds': 0},
     'parsing_wrong_start_2':       {'error': True,  'rounds': 0},
     'parsing_wrong_start_3':       {'error': True,  'rounds': 0},
     'parsing_wrong_start_4':       {'error': True,  'rounds': 0},
+    'parsing_wrong_start_5':       {'error': True,  'rounds': 0},
     'parsing_wrong_tube_1':        {'error': False, 'rounds': 7},
     'parsing_wrong_tube_2':        {'error': False, 'rounds': 7},
     'parsing_wrong_tube_3':        {'error': True,  'rounds': 0},
@@ -180,3 +189,15 @@ for map in maps:
         manage_error_returns(filename, exc.output, exc.returncode)
     else:
         print_rslt(filename, output)
+
+# maps = sorted(os.listdir('maps/cedric/tests/'))
+#
+# for map in maps:
+#     filename = os.path.splitext(map)[0]
+#     put(filename + ' ')
+#     try:
+#         output = subprocess.check_output(['./lem-in < maps/cedric/tests/' + map], shell=True, stderr=subprocess.STDOUT)
+#     except subprocess.CalledProcessError as exc:
+#         bad_returncode_msg(exc.output)
+#     else:
+#         ok_msg()

@@ -25,8 +25,8 @@ void		add_tube_to_anthill(char *line, t_graph *anthill)
 	room_2 = get_room_with_name(tubes[1], anthill);
 	if (room_1 && room_2)
 	{
-		ft_lstadd_back(&room_1->links, ft_lstnew(room_2, sizeof(room_2)));
-		ft_lstadd_back(&room_2->links, ft_lstnew(room_1, sizeof(room_1)));
+		ft_lstadd(&room_1->links, ft_lstnew(room_2, sizeof(room_2)));
+		ft_lstadd(&room_2->links, ft_lstnew(room_1, sizeof(room_1)));
 	}
 	ft_tabdel(&tubes);
 }

@@ -4,6 +4,7 @@ Ligne non conforme qui arrête la lecture :
 - une room qui n'a pas le format "name coord coord" peu importe le nombre d'espaces
   seul l'espace est considéré comme un séparateur.
 - une room dont le nom commence par un L ou contient un '-'
+- une room avec des coord négatives
 - un tube qui n'a pas le format "salle1-salle2". Tout autre format est considéré comme faux.
   l'espace est considéré comme un séparateur, donc faux sur cette ligne.
   tout autre caractère (hors '-') fait parti du nom de la room.

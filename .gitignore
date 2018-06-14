@@ -2,3 +2,4 @@
 libft/libft.a
 lem-in
 **/*.o
+**/*.pyc

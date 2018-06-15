@@ -21,6 +21,11 @@ void		add_tube_to_anthill(char *line, t_graph *anthill)
 	t_room	*room_2;
 
 	tubes = ft_strsplit(line, '-');
+	if (ft_strcmp(tubes[0], tubes[1]) == 0)
+	{
+		ft_tabdel(&tubes);
+		return ;
+	}
 	room_1 = get_room_with_name(tubes[0], anthill);
 	room_2 = get_room_with_name(tubes[1], anthill);
 	if (room_1 && room_2)

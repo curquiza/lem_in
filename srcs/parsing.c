@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parsing.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: curquiza <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/06/18 19:02:29 by curquiza          #+#    #+#             */
+/*   Updated: 2018/06/18 19:02:53 by curquiza         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "lem_in.h"
 
 static void	add_input_to_anthill(char *line, t_parsing *data, t_graph *anthill)
@@ -54,7 +66,7 @@ static void	get_rooms_and_tubes(t_graph *anthill, t_parsing *data)
 	}
 }
 
-static void write_input(t_input *lst)
+static void	write_input(t_input *lst)
 {
 	while (lst)
 	{

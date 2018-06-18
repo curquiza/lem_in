@@ -54,7 +54,7 @@ static t_room	*best_room_to_choose(t_room *current)
 	return (best);
 }
 
-void	move_ant(t_room *from, t_room *dest, int ant, t_graph *anthill)
+void			move_ant(t_room *from, t_room *dest, int ant, t_graph *anthill)
 {
 	if (dest)
 	{
@@ -76,7 +76,8 @@ void	move_ant(t_room *from, t_room *dest, int ant, t_graph *anthill)
 	}
 }
 
-int		is_favorable_start_to(t_room *dest, t_room *best_way, t_graph *anthill)
+int				is_favorable_start_to(t_room *dest, t_room *best_way,
+													t_graph *anthill)
 {
 	if (dest->weight - best_way->weight <= anthill->ants_in_start)
 		return (1);

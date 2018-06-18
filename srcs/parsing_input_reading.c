@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parsing_input_reading.c                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: curquiza <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/06/18 19:09:55 by curquiza          #+#    #+#             */
+/*   Updated: 2018/06/18 19:10:53 by curquiza         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "lem_in.h"
 
-static void	input_add_back(t_input **alst, t_input *new, t_input *last)
+static void		input_add_back(t_input **alst, t_input *new, t_input *last)
 {
 	t_input	*tmp;
 
@@ -23,7 +35,7 @@ static t_input	*input_new(char *line)
 	return (new);
 }
 
-void	del_input_list(t_input **alst)
+void			del_input_list(t_input **alst)
 {
 	t_input	*current;
 	t_input	*tmp;
@@ -41,7 +53,7 @@ void	del_input_list(t_input **alst)
 	*alst = NULL;
 }
 
-void	record_input_line(char **line, t_parsing *data)
+void			record_input_line(char **line, t_parsing *data)
 {
 	t_input	*new;
 
@@ -51,7 +63,7 @@ void	record_input_line(char **line, t_parsing *data)
 	ft_strdel(line);
 }
 
-void 	read_end_of_inputs(t_parsing *data)
+void			read_end_of_inputs(t_parsing *data)
 {
 	char	*line;
 

@@ -91,6 +91,10 @@ int				parser(t_graph *anthill);
 /*
 ** ALGO
 */
+t_room			*best_room_to_choose(t_room *current);
+void			move_ant(t_room *from, t_room *dest, int ant, t_graph *anthill);
+void			move_in_anthill(t_graph *anthill);
+void			move_in_start_room(t_graph *anthill);
 void			algo(t_graph *anthill);
 
 /*

@@ -30,9 +30,6 @@ void	algo(t_graph *anthill)
 	ft_putchar('\n');
 	while (anthill->ants_in_end < anthill->ants_nb)
 	{
-		// ft_putnbr2("ants in end : ", anthill->ants_in_end);
-		// ft_putnbr2("ants in start : ", anthill->ants_in_start);
-		// ft_putnbr2("next ants : ", anthill->next_ant);
 		move_in_anthill(anthill);
 		ft_putchar('\n');
 	}

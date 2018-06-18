@@ -3,9 +3,7 @@
 static int		is_favorable_start_to(t_room *dest, t_room *best_way,
 													t_graph *anthill)
 {
-	if (dest->weight - best_way->weight <= anthill->ants_in_start)
-		return (1);
-	return (0);
+	return (dest->weight - best_way->weight <= anthill->ants_in_start);
 }
 
 static int		start_is_empty(t_graph *anthill)

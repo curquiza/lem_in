@@ -14,14 +14,14 @@
 
 static t_room	*get_room_with_name(char *name, t_graph *anthill)
 {
-	int		i;
+	t_room	*tmp;
 
-	i = 0;
-	while (i < anthill->rooms_nb)
+	tmp = anthill->rooms_list;
+	while (tmp)
 	{
-		if (!ft_strcmp(anthill->rooms_array[i]->name, name))
-			return (anthill->rooms_array[i]);
-		i++;
+		if (!ft_strcmp(tmp->name, name))
+			return (tmp);
+		tmp = tmp->next;
 	}
 	return (NULL);
 }

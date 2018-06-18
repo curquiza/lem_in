@@ -12,12 +12,6 @@
 
 #include "lem_in.h"
 
-static void	ft_del_rooms_array(t_room ***tab)
-{
-	free(*tab);
-	*tab = NULL;
-}
-
 static void	del_links(t_list **links)
 {
 	t_list	*tmp;
@@ -56,6 +50,5 @@ static void	ft_del_rooms_list(t_room **alst)
 void		del_anthill(t_graph *anthill)
 {
 	ft_del_rooms_list(&anthill->rooms_list);
-	ft_del_rooms_array(&anthill->rooms_array);
 	ft_bzero(anthill, sizeof(*anthill));
 }

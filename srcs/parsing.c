@@ -55,7 +55,7 @@ static void	get_rooms_and_tubes(t_graph *anthill, t_parsing *data)
 		}
 		else if (!is_comment(line))
 		{
-			if (!is_valid_input(line, anthill, data))
+			if (!is_valid_input(line, data))
 			{
 				record_input_line(&line, data);
 				return ;

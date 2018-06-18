@@ -34,7 +34,6 @@ typedef struct	s_graph
 {
 	int		ants_nb;
 	int		rooms_nb;
-	t_room	**rooms_array;
 	t_room	*rooms_list;
 	int		ants_in_end;
 	int		ants_in_start;
@@ -75,7 +74,7 @@ t_room			*get_special_room(t_graph *anthill, int special_room);
 int				get_ants_number(t_graph *anthill, t_parsing *data);
 bool			is_valid_room(char *line);
 bool			is_valid_tube(char *line);
-bool			is_valid_input(char *line, t_graph *anthill, t_parsing *data);
+bool			is_valid_input(char *line, t_parsing *data);
 void			add_room_to_anthill(char *line, t_graph *anthill,
 									t_parsing *data, int special_room);
 void			add_tube_to_anthill(char *line, t_graph *anthill);

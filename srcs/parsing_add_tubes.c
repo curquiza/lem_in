@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parsing_add_tubes.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: curquiza <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/06/18 19:05:56 by curquiza          #+#    #+#             */
+/*   Updated: 2018/06/18 19:06:04 by curquiza         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "lem_in.h"
 
 static t_room	*get_room_with_name(char *name, t_graph *anthill)
@@ -14,7 +26,7 @@ static t_room	*get_room_with_name(char *name, t_graph *anthill)
 	return (NULL);
 }
 
-void		add_tube_to_anthill(char *line, t_graph *anthill)
+void			add_tube_to_anthill(char *line, t_graph *anthill)
 {
 	char	**tubes;
 	t_room	*room_1;

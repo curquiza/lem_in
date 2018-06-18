@@ -1,4 +1,4 @@
-#include "lem-in.h"
+#include "lem_in.h"
 
 static void	ft_del_rooms_array(t_room ***tab)
 {

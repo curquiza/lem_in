@@ -1,4 +1,4 @@
-#include "lem-in.h"
+#include "lem_in.h"
 
 int		get_ants_number(t_graph *anthill, t_parsing *data)
 {

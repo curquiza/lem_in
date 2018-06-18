@@ -1,4 +1,4 @@
-#include "lem-in.h"
+#include "lem_in.h"
 
 static t_room	*switch_rooms(t_room *room_1, t_room *rooms_2)
 {

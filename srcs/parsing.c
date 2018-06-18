@@ -1,4 +1,4 @@
-#include "lem-in.h"
+#include "lem_in.h"
 
 static void	add_input_to_anthill(char *line, t_parsing *data, t_graph *anthill)
 {

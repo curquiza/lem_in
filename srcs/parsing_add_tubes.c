@@ -1,4 +1,4 @@
-#include "lem-in.h"
+#include "lem_in.h"
 
 static t_room	*get_room_with_name(char *name, t_graph *anthill)
 {

@@ -1,4 +1,4 @@
-#include "lem-in.h"
+#include "lem_in.h"
 
 static void	input_add_back(t_input **alst, t_input *new, t_input *last)
 {

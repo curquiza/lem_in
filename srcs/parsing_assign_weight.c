@@ -1,4 +1,4 @@
-#include "lem-in.h"
+#include "lem_in.h"
 
 t_room		*get_special_room(t_graph *anthill, int special_room)
 {

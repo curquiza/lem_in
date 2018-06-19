@@ -6,7 +6,7 @@
 /*   By: curquiza <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/19 09:33:43 by curquiza          #+#    #+#             */
-/*   Updated: 2018/06/19 09:34:17 by curquiza         ###   ########.fr       */
+/*   Updated: 2018/06/19 13:41:39 by curquiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 ** - next room weight is lower than the current one
 */
 
-t_room	*best_room_to_choose(t_room *current)
+t_room		*best_room_to_choose(t_room *current)
 {
 	t_list	*link;
 	t_room	*best;
@@ -45,12 +45,34 @@ t_room	*best_room_to_choose(t_room *current)
 	return (best);
 }
 
-void	move_ant(t_room *from, t_room *dest, int ant, t_graph *anthill)
+static char	*ant_color(int ant)
+{
+	int		col;
+
+	col = ant % 6;
+	if (col == 0)
+		return (RED);
+	if (col == 1)
+		return (GREEN);
+	if (col == 2)
+		return (YELLOW);
+	if (col == 3)
+		return (BLUE);
+	if (col == 4)
+		return (PINK);
+	if (col == 5)
+		return (CYAN);
+	return (WHITE);
+}
+
+void		move_ant(t_room *from, t_room *dest, int ant, t_graph *anthill)
 {
 	if (dest)
 	{
 		ft_putchar('L');
+		ft_putstr(ant_color(ant));
 		ft_putnbr(ant);
+		ft_putstr(DEF);
 		ft_putchar('-');
 		ft_putstr(dest->name);
 		ft_putchar(' ');
@@ -67,7 +89,7 @@ void	move_ant(t_room *from, t_room *dest, int ant, t_graph *anthill)
 	}
 }
 
-void	move_in_anthill(t_graph *anthill)
+void		move_in_anthill(t_graph *anthill)
 {
 	t_room	*room;
 	t_room	*best_way;

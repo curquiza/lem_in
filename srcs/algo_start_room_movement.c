@@ -6,7 +6,7 @@
 /*   By: curquiza <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/19 09:35:01 by curquiza          #+#    #+#             */
-/*   Updated: 2018/06/19 09:35:03 by curquiza         ###   ########.fr       */
+/*   Updated: 2018/06/19 13:40:43 by curquiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,12 @@ static int		start_is_empty(t_graph *anthill)
 
 static t_room	*best_other_way(t_room *current)
 {
-	t_list	*link;
-	t_room	*best;
-	t_room	*tmp_room;
+	t_list		*link;
+	t_room		*best;
+	t_room		*tmp_room;
 
 	best = NULL;
 	link = current->links;
-	int i =0;
 	while (link)
 	{
 		tmp_room = (t_room *)link->content;
@@ -45,7 +44,6 @@ static t_room	*best_other_way(t_room *current)
 				best = tmp_room;
 			}
 		}
-		i++;
 		link = link->next;
 	}
 	return (best);

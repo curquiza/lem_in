@@ -45,12 +45,34 @@ t_room	*best_room_to_choose(t_room *current)
 	return (best);
 }
 
+static char *	ant_color(int ant)
+{
+	int		col;
+
+	col = ant % 6;
+	if (col == 0)
+		return (RED);
+	if (col == 1)
+		return (GREEN);
+	if (col == 2)
+		return (YELLOW);
+	if (col == 3)
+		return (BLUE);
+	if (col == 4)
+		return (PINK);
+	if (col == 5)
+		return (CYAN);
+	return (WHITE);
+}
+
 void	move_ant(t_room *from, t_room *dest, int ant, t_graph *anthill)
 {
 	if (dest)
 	{
 		ft_putchar('L');
+		ft_putstr(ant_color(ant));
 		ft_putnbr(ant);
+		ft_putstr(DEF);
 		ft_putchar('-');
 		ft_putstr(dest->name);
 		ft_putchar(' ');

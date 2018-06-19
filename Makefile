@@ -14,6 +14,8 @@ C_FILES = $(addprefix $(C_DIR)/, \
 			parsing_input_reading.c \
 			parsing_assign_weight.c \
 			algo.c \
+			algo_anthill_movement.c \
+			algo_start_room_movement.c \
 			del_anthill.c \
 			main.c)
 

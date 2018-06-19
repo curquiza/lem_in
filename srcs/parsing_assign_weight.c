@@ -1,13 +1,25 @@
-#include "lem-in.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parsing_assign_weight.c                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: curquiza <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/06/18 19:07:21 by curquiza          #+#    #+#             */
+/*   Updated: 2018/06/18 19:07:22 by curquiza         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "lem_in.h"
 
 t_room		*get_special_room(t_graph *anthill, int special_room)
 {
-	int		i;
+	t_room	*tmp;
 
-	i = 0;
-	while (anthill->rooms_array[i]->special_room != special_room)
-		i++;
-	return (anthill->rooms_array[i]);
+	tmp = anthill->rooms_list;
+	while (tmp && tmp->special_room != special_room)
+		tmp = tmp->next;
+	return (tmp);
 }
 
 static void	assign_weight_on(t_room *room, int weight, t_graph *anthill)
@@ -30,7 +42,7 @@ int			assign_weights(t_graph *anthill, t_parsing *data)
 {
 	t_room	*start;
 
-	if (!anthill->rooms_array || !data->start || !data->end)
+	if (!anthill->rooms_list || !data->start || !data->end)
 		return (-1);
 	assign_weight_on(get_special_room(anthill, END), 1, anthill);
 	start = get_special_room(anthill, START);

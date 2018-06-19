@@ -1,20 +1,32 @@
-#include "lem-in.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parsing_add_tubes.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: curquiza <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/06/18 19:05:56 by curquiza          #+#    #+#             */
+/*   Updated: 2018/06/18 19:06:04 by curquiza         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "lem_in.h"
 
 static t_room	*get_room_with_name(char *name, t_graph *anthill)
 {
-	int		i;
+	t_room	*tmp;
 
-	i = 0;
-	while (i < anthill->rooms_nb)
+	tmp = anthill->rooms_list;
+	while (tmp)
 	{
-		if (!ft_strcmp(anthill->rooms_array[i]->name, name))
-			return (anthill->rooms_array[i]);
-		i++;
+		if (!ft_strcmp(tmp->name, name))
+			return (tmp);
+		tmp = tmp->next;
 	}
 	return (NULL);
 }
 
-void		add_tube_to_anthill(char *line, t_graph *anthill)
+void			add_tube_to_anthill(char *line, t_graph *anthill)
 {
 	char	**tubes;
 	t_room	*room_1;

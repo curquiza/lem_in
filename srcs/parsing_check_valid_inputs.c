@@ -1,4 +1,16 @@
-#include "lem-in.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parsing_check_valid_inputs.c                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: curquiza <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/06/18 19:08:56 by curquiza          #+#    #+#             */
+/*   Updated: 2018/06/18 19:09:00 by curquiza         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "lem_in.h"
 
 bool		is_valid_tube(char *line)
 {
@@ -41,24 +53,7 @@ bool		is_valid_room(char *line)
 	return (true);
 }
 
-static void	create_rooms_array(t_graph *anthill)
-{
-	int		i;
-	t_room	*tmp;
-
-	anthill->rooms_array = ft_memalloc(sizeof(*anthill->rooms_array)
-										* anthill->rooms_nb);
-	tmp = anthill->rooms_list;
-	i = 0;
-	while (tmp)
-	{
-		anthill->rooms_array[i] = tmp;
-		tmp = tmp->next;
-		i++;
-	}
-}
-
-bool		is_valid_input(char *line, t_graph *anthill, t_parsing *data)
+bool		is_valid_input(char *line, t_parsing *data)
 {
 	if (data->rooms_reading_done == 0)
 	{
@@ -67,7 +62,6 @@ bool		is_valid_input(char *line, t_graph *anthill, t_parsing *data)
 		else if (is_valid_tube(line))
 		{
 			data->rooms_reading_done = 1;
-			create_rooms_array(anthill);
 			return (true);
 		}
 		return (false);

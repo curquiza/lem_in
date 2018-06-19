@@ -1,10 +1,16 @@
-#include "lem-in.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   del_anthill.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: curquiza <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/06/18 18:57:00 by curquiza          #+#    #+#             */
+/*   Updated: 2018/06/18 18:58:08 by curquiza         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-static void	ft_del_rooms_array(t_room ***tab)
-{
-	free(*tab);
-	*tab = NULL;
-}
+#include "lem_in.h"
 
 static void	del_links(t_list **links)
 {
@@ -41,11 +47,8 @@ static void	ft_del_rooms_list(t_room **alst)
 	*alst = NULL;
 }
 
-
-
 void		del_anthill(t_graph *anthill)
 {
 	ft_del_rooms_list(&anthill->rooms_list);
-	ft_del_rooms_array(&anthill->rooms_array);
 	ft_bzero(anthill, sizeof(*anthill));
 }

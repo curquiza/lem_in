@@ -30,6 +30,8 @@ static void	assign_weight_on(t_room *room, int weight, t_graph *anthill)
 	{
 		room->weight = weight;
 		link = room->links;
+		if (room->special_room == START)
+			return ;
 		while (link)
 		{
 			assign_weight_on(link->content, weight + 1, anthill);

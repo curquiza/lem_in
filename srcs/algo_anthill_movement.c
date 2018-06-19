@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   algo_anthill_movement.c                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: curquiza <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/06/19 09:33:43 by curquiza          #+#    #+#             */
+/*   Updated: 2018/06/19 09:34:17 by curquiza         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "lem_in.h"
 
 /*
@@ -5,6 +17,7 @@
 ** - no ant in the next room
 ** - next room weight is lower than the current one
 */
+
 t_room	*best_room_to_choose(t_room *current)
 {
 	t_list	*link;

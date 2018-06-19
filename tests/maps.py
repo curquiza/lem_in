@@ -13,6 +13,8 @@ MAPS = {
     'multi_ways_5':                {'error': False, 'rounds': 7},
     'multi_ways_6':                {'error': False, 'rounds': 8},
     'multi_ways_7':                {'error': False, 'rounds': 6},
+    'multi_ways_8':                {'error': False, 'rounds': 8},
+    'multi_ways_9':                {'error': False, 'rounds': 7},
     'no_path_1':                   {'error': True,  'rounds': 0},
     'no_path_2':                   {'error': True,  'rounds': 0},
     'parsing_big_nb_of_ants':      {'error': True,  'rounds': 0},
